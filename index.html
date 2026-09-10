@@ -1,24 +1,421 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.7">
-  <style type="text/css">
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #000000; color: rgba(0, 0, 0, 0.85); -webkit-text-stroke: rgba(0, 0, 0, 0.85); background-color: #b3b3b3}
-    li.li2 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    span.s1 {font-kerning: none}
-    span.s2 {-webkit-text-stroke: 0px #000000}
-    ol.ol1 {list-style-type: decimal}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GD Vault Stats</title>
+  <style>
+    :root {
+      --ink: #25252b;
+      --muted: #77757b;
+      --paper: #fbfbfa;
+      --line: #dcdcdc;
+      --accent: #6847a8;
+      --accent-dark: #4b2e83;
+      --gold: #e3a72f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f2f2f1;
+      font-family: "Avenir Next", Avenir, Helvetica, sans-serif;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1000px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 70px;
+    }
+
+    .page::before,
+    .page::after {
+      position: fixed;
+      top: 0;
+      z-index: -1;
+      width: max(28px, calc((100vw - 1000px) / 2));
+      height: 100vh;
+      content: "";
+      opacity: .95;
+      pointer-events: none;
+      background-color: #0862be;
+      background-image:
+        linear-gradient(#1476db 0 0),
+        linear-gradient(#0d6aca 0 0),
+        linear-gradient(#116fd2 0 0),
+        linear-gradient(#0758ad 0 0),
+        linear-gradient(#1b80e4 0 0),
+        linear-gradient(#0a61bd 0 0),
+        linear-gradient(#217dd4 0 0);
+      background-repeat: no-repeat;
+      background-size: 76px 112px, 122px 66px, 55px 154px, 104px 92px, 68px 48px, 145px 126px, 42px 82px;
+      background-position: 8px 20px, 72px 144px, 0 286px, 84px 418px, 16px 554px, 68px 650px, 4px 806px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+
+    .page::before { left: 0; }
+    .page::after {
+      right: 0;
+      transform: scaleX(-1);
+    }
+
+    .hero {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+      padding: 28px 30px;
+      color: white;
+      background: linear-gradient(120deg, #30243f, #65469b 58%, #b185d8);
+      border-radius: 4px;
+      box-shadow: 0 12px 30px rgba(45, 32, 60, .16);
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: #dfd0f3;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 430px;
+      margin: 13px 0 0;
+      color: #eee8f7;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .hero-stat {
+      flex: 0 0 auto;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 3px;
+      background: rgba(255,255,255,.12);
+      text-align: center;
+    }
+
+    .hero-stat strong { display: block; font-size: 28px; }
+    .hero-stat span { color: #e6daf5; font-size: 11px; text-transform: uppercase; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 285px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .list-panel, .side-panel {
+      background: var(--paper);
+      border: 1px dashed var(--line);
+      box-shadow: 0 7px 20px rgba(0,0,0,.045);
+    }
+
+    .list-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .list-heading h2 { margin: 0; font-size: 20px; }
+    .list-heading span { color: var(--muted); font-size: 12px; }
+
+    .level-row {
+      display: grid;
+      grid-template-columns: 45px 166px minmax(0, 1fr) 58px;
+      gap: 16px;
+      align-items: center;
+      min-height: 128px;
+      padding: 16px 20px;
+      background: rgba(251, 251, 250, .96);
+      border-bottom: 1px solid #e8e8e8;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .level-row:last-child { border-bottom: 0; }
+    .level-row:hover { background: #f4f0fa; transform: translateX(3px); }
+
+    .rank {
+      color: #9d9aa2;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .thumb {
+      display: flex;
+      align-items: end;
+      width: 166px;
+      height: 92px;
+      padding: 10px;
+      overflow: hidden;
+      color: white;
+      background: var(--thumb, linear-gradient(135deg, #251e35, #9c6fc9));
+      border-radius: 2px;
+      box-shadow: inset 0 -32px 40px rgba(0,0,0,.34);
+    }
+
+    .thumb span {
+      font-family: Georgia, serif;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 2px 5px rgba(0,0,0,.7);
+    }
+
+    .level-name {
+      margin: 0 0 8px;
+      font-family: Georgia, serif;
+      font-size: 23px;
+      line-height: 1.05;
+    }
+
+    .creator-line {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .creator-link {
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-color: #b8a4d6;
+      text-underline-offset: 3px;
+    }
+
+    .profile-link {
+      padding: 0;
+      color: var(--accent);
+      background: none;
+      border: 0;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .profile-link:hover { color: var(--accent-dark); text-decoration: underline; }
+
+    .points { color: var(--muted); font-size: 12px; }
+
+    .stars {
+      color: var(--gold);
+      font-size: 17px;
+      letter-spacing: 1px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .stars small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0;
+    }
+
+    .side-panel { padding: 24px 21px; }
+    .side-panel h2 { margin: 0 0 10px; font-size: 23px; }
+    .side-panel p { margin: 0 0 20px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+    .legend {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .legend li { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 11px; border-bottom: 1px solid #e7e7e7; font-size: 13px; }
+    .legend li:last-child { border-bottom: 0; }
+    .legend strong { color: var(--accent); }
+
+    .note { margin-top: 24px !important; padding-top: 18px; border-top: 1px solid var(--line); }
+
+    .profile-modal {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(27, 20, 35, .58);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+
+    .profile-modal.open { opacity: 1; pointer-events: auto; }
+
+    .modal-card {
+      width: min(380px, 100%);
+      padding: 27px;
+      background: var(--paper);
+      border-top: 5px solid var(--accent);
+      box-shadow: 0 18px 50px rgba(0,0,0,.25);
+    }
+
+    .modal-card h2 { margin: 0 0 8px; font-family: Georgia, serif; font-size: 30px; }
+    .modal-card p { margin: 0 0 20px; color: var(--muted); line-height: 1.45; }
+    .close-modal { padding: 9px 14px; color: white; background: var(--accent); border: 0; border-radius: 2px; cursor: pointer; font-weight: 700; }
+
+    @media (max-width: 820px) {
+      .page::before,
+      .page::after { display: none; }
+    }
+
+    @media (max-width: 820px) {
+      .layout { grid-template-columns: 1fr; }
+      .side-panel { order: -1; }
+    }
+
+    @media (max-width: 600px) {
+      .page { width: min(100% - 18px, 560px); padding-top: 18px; }
+      .hero { display: block; padding: 23px 20px; }
+      .hero-stat { display: inline-block; margin-top: 20px; }
+      .level-row { grid-template-columns: 33px 1fr 45px; gap: 10px; min-height: 106px; padding: 12px 10px; }
+      .thumb { grid-column: 2; grid-row: 1; width: 100%; height: 76px; }
+      .level-copy { grid-column: 2; grid-row: 2; }
+      .rank { grid-column: 1; grid-row: 1 / span 2; }
+      .stars { grid-column: 3; grid-row: 1 / span 2; font-size: 13px; }
+      .level-name { font-size: 20px; }
+      .thumb span { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
-<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>My first webpage</b></span></h1>
-<ol class="ol1">
-  <li class="li2"><span class="s2"></span><span class="s1">This is my first <b>visual</b>!</span></li>
-</ol>
-<p class="p3"><span class="s1">Click me</span></p>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Geometry Dash 1.1 community list</p>
+        <h1>GD Vault Stats</h1>
+        <p>A ranked collection of memorable levels, creators, and the people behind their in-game names.</p>
+      </div>
+      <div class="hero-stat"><strong id="level-count">41</strong><span>levels tracked</span></div>
+    </header>
+
+    <div class="layout">
+      <section class="list-panel" aria-labelledby="list-title">
+        <div class="list-heading"><h2 id="list-title">Featured level list</h2><span>9 stars first · 8 stars after</span></div>
+        <div id="level-list"></div>
+      </section>
+
+      <aside class="side-panel">
+        <h2>How to read it</h2>
+        <p>Each entry pairs a generated level cover with its creator, rating, and points.</p>
+        <ul class="legend">
+          <li><span>Difficulty</span><strong>9 stars</strong></li>
+          <li><span>Difficulty</span><strong>8 stars</strong></li>
+          <li><span>Profiles</span><strong>Click bracket name</strong></li>
+        </ul>
+        <p class="note">Click a purple profile name to see the creator's in-game profile name.</p>
+      </aside>
+    </div>
+  </main>
+
+  <div class="profile-modal" id="profile-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <h2 id="modal-title">Profile</h2>
+      <p id="modal-copy"></p>
+      <button class="close-modal" type="button">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const levels = [
+      ["Intergalactic Void", "jarele78789", "greg", 9, "#3a2549, #d28cbd"],
+      ["Crack Step 18", "Mark5656011_friend", "Mark_35", 9, "#172c45, #35a1b5"],
+      ["Glacier", "PolyDashDev", "Robtop", 9, "#193d58, #8dd9e4"],
+      ["Space Battle", "PetsimXplayer19900", "pet", 9, "#28204c, #e274a7"],
+      ["Hades", "jarele78789", "greg", 9, "#401a27, #e05e4d"],
+      ["Beyond the Hell", "Mark5656011_friend", "Mark_35", 9, "#251536, #bd4d89"],
+      ["Bad Apple", "Mark5656011_friend", "Mark_35", 9, "#301d1e, #db9360"],
+      ["Rockgamer Basic 1", "Tank5m5", "Rockgamer", 9, "#23352c, #9cc364"],
+      ["SAKUPEN SMITE", "FelipeFilip2010", "FelipeFilip", 9, "#461d42, #cb5dc3"],
+      ["Funky Punk", "Jivchik83", "", 9, "#55311e, #f0aa58"],
+      ["Exit53", "sincara_davido", "", 9, "#202d3a, #76b9d8"],
+      ["Sakupen Reborn", "FelipeFilip2010", "FelipeFilip", 9, "#321b46, #e35bb2"],
+      ["Your World Your Fame", "Mark5656011_friend", "Mark_35", 9, "#203f4c, #58c0bc"],
+      ["Quiet", "jarele78789", "greg", 9, "#31303c, #a8a5d8"],
+      ["Spikez", "Crazyfrontop", "Yenzoo", 9, "#31231c, #e5b247"],
+      ["The Darkness", "kafaGD", "Kagames", 9, "#13131e, #706b9f"],
+      ["Roadmap to Heaven", "Blue_BetterGD", "BlueBetter", 9, "#245679, #e1b86c"],
+      ["Dark", "mrdpikachu", "", 9, "#161d2e, #577de0"],
+      ["Starry Night", "nanaskyny", "", 9, "#171d43, #765bd6"],
+      ["Military Zone", "PetsimXplayer19900", "pet", 9, "#38412b, #bd874a"],
+      ["Ice Frost", "NullZeroFate", "Zero", 9, "#28536b, #c8f4f1"],
+      ["Pad Hell", "nanaskyny", "", 9, "#352235, #db71a4"],
+      ["Null Point", "KristWasBanned", "KristOffScript", 8, "#2c3447, #7b9fce"],
+      ["TempoGenesis", "Blue_BetterGD", "BlueBetter", 8, "#3e2742, #d267a8"],
+      ["Dark Memory", "gdapdsa", "D555py", 8, "#252a35, #9aa0bd"],
+      ["Void Dungeon", "yakemerald", "", 8, "#182e30, #4ac2a0"],
+      ["Adventure III", "Mark5656011_friend", "Mark_35", 8, "#4b2a1c, #e5a45a"],
+      ["Dog with Book II", "yakemerald", "", 8, "#343028, #bf9f72"],
+      ["La Ruta", "D555py", "gdapdsa", 8, "#302545, #a58bd8"],
+      ["Area One", "arupaka213", "", 8, "#1c3b46, #4ab0ae"],
+      ["Mix Era", "D555py", "gdapdsa", 8, "#482a40, #e174a2"],
+      ["The Darkness II", "kafaGD", "Kagames", 8, "#20202f, #9284b9"],
+      ["The Darkness III", "kafaGD", "Kagames", 8, "#171a25, #a66a8f"],
+      ["Battle of The Shades", "", "", 8, "#22232f, #bf88c9"],
+      ["History Book", "sirrirrll", "SRL", 8, "#453222, #d4a763"],
+      ["Sweetest Jane", "KristWasBanned", "KristOffScript", 8, "#3d243b, #e09bb9"],
+      ["Violet Clouds", "NullZeroFate", "Zero", 8, "#302354, #a88bed"],
+      ["ReShaded", "Datrix150", "Datrix", 8, "#283331, #75b999"],
+      ["Goober Level", "Datrix150", "Datrix", 8, "#45331c, #dbbd67"],
+      ["From Cave to City", "nanaskyny", "", 8, "#293b32, #7fc06e"],
+      ["Lukewarm", "yakemerald", "", 8, "#3d2d25, #d39162"]
+    ];
+
+    const list = document.querySelector('#level-list');
+    const modal = document.querySelector('#profile-modal');
+    const modalTitle = document.querySelector('#modal-title');
+    const modalCopy = document.querySelector('#modal-copy');
+
+    levels.forEach((level, index) => {
+      const [name, creator, profile, stars, colors] = level;
+      const row = document.createElement('article');
+      row.className = 'level-row';
+      row.innerHTML = `
+        <div class="rank">${index + 1}</div>
+        <div class="thumb" style="--thumb: linear-gradient(135deg, ${colors})"><span>${name}</span></div>
+        <div class="level-copy">
+          <h3 class="level-name">${name}</h3>
+          <p class="creator-line">published by <a class="creator-link" href="#">${creator || 'Unknown creator'}</a>${profile ? ` <span>·</span> <button class="profile-link" type="button" data-creator="${creator}" data-profile="${profile}">${profile}</button>` : ''}</p>
+          <div class="points">${stars}.00 (${stars === 9 ? 100 : 88}%) — ${stars === 9 ? '450.00' : '350.00'} (100%) points</div>
+        </div>
+        <div class="stars" aria-label="${stars} stars">${'★'.repeat(stars)}<small>${stars} stars</small></div>`;
+      list.appendChild(row);
+    });
+
+    document.querySelector('#level-count').textContent = levels.length;
+
+    document.querySelectorAll('.profile-link').forEach((button) => {
+      button.addEventListener('click', () => {
+        modalTitle.textContent = button.dataset.profile;
+        modalCopy.textContent = `${button.dataset.creator}'s in-game profile name is ${button.dataset.profile}.`;
+        modal.classList.add('open');
+      });
+    });
+
+    document.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (event) => { if (event.target === modal) modal.classList.remove('open'); });
+  </script>
 </body>
 </html>
