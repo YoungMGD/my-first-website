@@ -42,15 +42,11 @@ const sheetLevels = [
 
 const sheetList = document.querySelector('#level-list');
 sheetList.innerHTML = '';
-sheetLevels.splice(17, 1);
 sheetLevels.forEach((level, index) => {
 	const [name, creator, profile, points] = level;
-	const sheetIndex = index >= 17 ? index + 1 : index;
-	const column = sheetIndex % 6;
-	const row = Math.floor(sheetIndex / 6);
 	const card = document.createElement('article');
 	card.className = 'level-row sheet-row';
-	const coverIndex = sheetIndex + 1;
+	const coverIndex = index + 1;
 	card.innerHTML = `<div class="rank">${index + 1}</div><div class="thumb sheet-cover" title="${name} cover"><img src="covers/${String(coverIndex).padStart(2, '0')}.png" alt="${name} cover"></div><div class="level-copy"><h2 class="level-name">${name}</h2><p class="creator-line">published by <a class="creator-link" href="#">${creator || 'Unknown creator'}</a>${profile ? ` <span>·</span> <button class="profile-link" type="button" data-creator="${creator}" data-profile="${profile}">${profile}</button>` : ''}</p><div class="points">${points}.00 (${points === 9 ? 100 : 88}%) — ${points === 9 ? '450.00' : '350.00'} (100%) points</div></div>`;
 	sheetList.appendChild(card);
 });
