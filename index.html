@@ -5,63 +5,462 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GD Vault Stats</title>
 <style>
-:root{--ink:#29292d;--muted:#77777c;--line:#d8d8d8;--blue:#1684cc}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#fafafa;font-family:"Avenir Next",Avenir,Helvetica,sans-serif}a{color:inherit}.site-header{background:#fff;border-bottom:1px solid #cfcfcf}.brandbar{display:flex;align-items:center;justify-content:space-between;min-height:86px;padding:0 30px}.brand{color:#4b4b50;font-size:28px;font-weight:900;letter-spacing:-1.4px;text-decoration:none}.brand span{color:var(--blue)}.menu-icon{display:grid;gap:5px;width:25px}.menu-icon i{height:4px;border-radius:2px;background:#bcbcbc}.main-nav{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #dedede;border-bottom:1px dashed #d2d2d2}.main-nav a{padding:19px 12px 21px;color:#45454a;font-size:27px;font-weight:800;text-align:center;text-decoration:none}.main-nav a:hover,.main-nav a.active{color:var(--blue);background:#fafafa}.blue-rule{height:62px;background:#fdfdfd;border-bottom:1px dashed #d1d1d1}.page{width:min(1160px,calc(100% - 56px));margin:0 auto}.section{display:none;padding:38px 0 72px}.section.active{display:block}.list-surface{overflow:hidden;background:#fff;border:1px dashed #d2d2d2}.list-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:0 32px 25px;border-bottom:1px dashed #d2d2d2}.list-heading h1{margin:0;font-size:31px;letter-spacing:-.8px}.list-heading p{margin:0;color:var(--muted);font-size:14px}.level-row{display:grid;grid-template-columns:62px 300px minmax(0,1fr);gap:28px;align-items:center;min-height:190px;padding:28px 32px;background:#fff;border-bottom:1px dashed #d2d2d2;transition:background .2s,transform .2s}.level-row:last-child{border-bottom:0}.level-row:hover{background:#fbfbfd;transform:translateX(4px)}.rank{color:#aaaab0;font-size:25px;font-weight:700;text-align:center}.thumb{position:relative;width:300px;height:150px;overflow:hidden;background:#19233b;box-shadow:0 5px 13px rgba(0,0,0,.13)}.thumb svg{display:block;width:100%;height:100%}.thumb:after{position:absolute;inset:0;content:"";pointer-events:none;background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.14) 43%,transparent 45%),repeating-linear-gradient(0deg,transparent 0 11px,rgba(255,255,255,.035) 12px 13px);mix-blend-mode:screen}.art-note{position:absolute;right:8px;top:8px;z-index:2;max-width:78%;padding:5px 7px;color:#fff;background:rgba(0,0,0,.48);border-left:3px solid var(--art-color);font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;text-shadow:0 1px 2px #000;line-height:1.15}.level-name{margin:0 0 8px;font-size:31px;line-height:1.05;letter-spacing:-.7px}.creator-line{margin:0 0 9px;color:#4a4a4e;font-size:20px;font-weight:600}.creator-link{font-weight:800;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:5px}.profile-link{padding:0;color:var(--blue);background:none;border:0;font:inherit;font-weight:800;cursor:pointer}.profile-link:hover{text-decoration:underline}.points{color:#505056;font-size:18px}.side-note{display:grid;grid-template-columns:1fr 250px;gap:30px;align-items:center;margin-top:22px;padding:29px 32px;background:#fff;border:1px dashed #d2d2d2}.side-note h2{margin:0 0 9px;font-size:25px}.side-note p{max-width:680px;margin:0;color:var(--muted);font-size:16px;line-height:1.5}.roblox-link{display:block;padding:15px 18px;color:#fff;background:#e53935;font-weight:800;text-align:center;text-decoration:none;border-radius:2px}.roblox-link:hover{background:#bd2b28}.coming{padding:70px 30px;background:#fff;border:1px dashed #d2d2d2;text-align:center}.coming h1{margin:0 0 12px;font-size:42px}.coming p{margin:0;color:var(--muted);font-size:18px}.roulette{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:26px;align-items:start}.roulette-card,.roulette-help{padding:30px;background:#fff;border:1px dashed #d2d2d2}.roulette-card h1{margin:0 0 8px;font-size:35px}.roulette-help p{color:var(--muted);line-height:1.5}.roulette-level{margin:27px 0 20px;padding:24px;color:#fff;background:linear-gradient(135deg,#1e2650,#168dd0);text-align:center}.roulette-level small{display:block;color:#bde9ff;font-size:13px;text-transform:uppercase;letter-spacing:1px}.roulette-level strong{display:block;margin:8px 0;font-family:Georgia,serif;font-size:52px}.roulette-level span{font-size:20px;font-weight:800}.progress-track{height:12px;margin:14px 0 22px;background:#dce3e8;border-radius:10px;overflow:hidden}.progress-track i{display:block;height:100%;width:1%;background:#26c275;transition:width .25s}.roulette-actions{display:flex;flex-wrap:wrap;gap:10px}.roulette-actions button{padding:11px 15px;color:#fff;background:#247db5;border:0;border-radius:2px;font:inherit;font-weight:800;cursor:pointer}.roulette-actions button:hover{background:#175b89}.roulette-actions button:disabled{cursor:not-allowed;opacity:.45}.roulette-actions .secondary{color:#31566d;background:#e2edf3}.roulette-help h2{margin:0 0 10px;font-size:24px}.skip-count{color:#247db5;font-weight:800}.profile-modal{position:fixed;inset:0;display:grid;place-items:center;padding:20px;background:rgba(20,23,34,.6);opacity:0;pointer-events:none;transition:opacity .2s}.profile-modal.open{opacity:1;pointer-events:auto}.modal-card{width:min(380px,100%);padding:28px;background:#fff;border-top:5px solid var(--blue);box-shadow:0 15px 50px rgba(0,0,0,.25)}.modal-card h2{margin:0 0 8px;font-family:Georgia,serif;font-size:30px}.modal-card p{margin:0 0 20px;color:var(--muted);line-height:1.5}.close-modal{padding:10px 15px;color:#fff;background:#247db5;border:0;border-radius:2px;font-weight:800;cursor:pointer}@media(max-width:760px){.brandbar{min-height:70px;padding:0 16px}.brand{font-size:23px}.main-nav a{padding:15px 4px;font-size:17px}.blue-rule{height:25px}.page{width:calc(100% - 20px)}.list-heading{display:block;padding:22px 16px}.list-heading p{margin-top:6px}.level-row{grid-template-columns:31px minmax(0,1fr);gap:12px;padding:18px 12px}.rank{grid-row:1/span 2;font-size:18px}.thumb{grid-column:2;width:100%;height:auto;aspect-ratio:2/1}.level-copy{grid-column:2}.level-name{font-size:24px}.creator-line{font-size:16px}.points{font-size:14px}.side-note,.roulette{grid-template-columns:1fr}}
+:root{--ink:#29292d;--muted:#77777c;--line:#d8d8d8;--blue:#1684cc}*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#fafafa;font-family:"Avenir Next",Avenir,Helvetica,sans-serif}a{color:inherit}.site-header{background:#fff;border-bottom:1px solid #cfcfcf}.brandbar{display:flex;align-items:center;justify-content:space-between;min-height:86px;padding:0 30px}.brand{color:#4b4b50;font-size:28px;font-weight:900;letter-spacing:-1.4px;text-decoration:none}.brand span{color:var(--blue)}.header-actions{display:flex;align-items:center;gap:18px}.google-signin{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border:1px solid #d6d9df;border-radius:10px;background:#fff;color:#2f343d;font-weight:800;font-size:18px;cursor:pointer}.google-icon{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#1c63f2;color:#fff;font-size:12px}.menu-icon{display:grid;gap:5px;width:25px}.menu-icon i{height:4px;border-radius:2px;background:#bcbcbc}.main-nav{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #dedede;border-bottom:1px dashed #d2d2d2}.main-nav a{padding:19px 12px 21px;color:#45454a;font-size:27px;font-weight:900;text-align:center;text-decoration:none}.main-nav a:hover,.main-nav a.active{color:var(--blue);background:#fafafa}.blue-rule{height:62px;background:#fdfdfd;border-bottom:1px dashed #d1d1d1}.page{width:min(1160px,calc(100% - 56px));margin:0 auto}.section{display:none;padding:38px 0 72px}.section.active{display:block}.list-surface{overflow:hidden;background:#fff;border:1px dashed #d2d2d2}.list-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:0 32px 25px;border-bottom:1px dashed #d2d2d2}.list-heading h1{margin:0;font-size:31px;letter-spacing:-.8px}.list-heading p{margin:0;color:var(--muted);font-size:14px}.level-row{display:grid;grid-template-columns:62px 300px minmax(0,1fr);gap:28px;align-items:center;min-height:190px;padding:28px 32px;background:#fff;border-bottom:1px dashed #d2d2d2;transition:background .2s,transform .2s}.level-row:last-child{border-bottom:0}.level-row:hover{background:#fbfbfd;transform:translateX(4px)}.rank{color:#aaaab0;font-size:25px;font-weight:700;text-align:center}.thumb{position:relative;width:300px;height:150px;overflow:hidden;background:#19233b;box-shadow:0 5px 13px rgba(0,0,0,.13)}.thumb img{display:block;width:100%;height:100%;object-fit:cover}.art-note{position:absolute;left:12px;right:12px;bottom:10px;padding:6px 8px;border-radius:999px;background:rgba(0,0,0,.18);color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.level-copy h2{margin:0;font-size:52px;line-height:1.1;letter-spacing:-2px;font-weight:900}.creator-line{margin:12px 0 0;color:#5e636d;font-size:24px;letter-spacing:-.4px}.creator-line .creator-link{text-decoration:none;font-weight:700}.profile-link{background:none;border:0;padding:0;color:#1684cc;font-weight:800;cursor:pointer}.side-note{margin-top:18px;padding:18px 16px;border:1px dashed #d2d2d2;background:#fff}.side-note h2{margin:0 0 8px;font-size:25px;letter-spacing:-.7px}.side-note p{margin:0;font-size:17px;line-height:1.55;color:#444}.discord-link,.roblox-link{display:inline-block;margin-top:12px;padding:10px 16px;border-radius:999px;background:#1c63f2;color:#fff;font-weight:800;text-decoration:none}.discord-link{background:#5865f2}.discord-icon{display:inline-block;width:18px;height:18px;border-radius:50%;background:#fff;color:#5865f2;margin-right:8px;transform:translateY(2px)}.roulette{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);gap:22px}.roulette-card,.roulette-help{background:#fff;border:1px dashed #d2d2d2;padding:26px}.roulette-card h1,.roulette-help h2{margin:0 0 16px;font-size:35px;letter-spacing:-1px}.roulette-level{display:grid;gap:8px;margin-bottom:18px}.roulette-level small{color:#6a7179}.roulette-level strong{font-size:60px;letter-spacing:-2px}.roulette-level span{font-size:21px;color:#3e4349}.progress-track{height:18px;background:#ececec;border-radius:999px;overflow:hidden;margin-bottom:16px}.progress-track i{display:block;height:100%;width:1%;background:linear-gradient(90deg,#2d88ff,#63c7ff)}.roulette-actions{display:flex;flex-wrap:wrap;gap:10px}.roulette-actions button{border:1px solid #d7d7d7;background:#fff;padding:12px 18px;border-radius:10px;font-weight:800;cursor:pointer}.roulette-actions .secondary{background:#f4f6fb}.skip-count{font-weight:900;color:#0d6ebd}.record-submission{position:relative;background:#fff;border:1px dashed #d2d2d2;padding:24px 26px}.record-close{position:absolute;top:12px;right:14px;border:0;background:none;color:#6f7380;font-size:38px;cursor:pointer}.record-submission h1{margin:0 0 18px;font-size:42px;letter-spacing:-1.2px}.record-row{display:grid;gap:10px;padding:14px 0;border-top:1px dashed #dfe2e5}.record-row:first-of-type{border-top:0}.record-field h2{margin:0;font-size:28px;letter-spacing:-.7px}.record-field p{margin:0;color:#4c535d;font-size:17px;line-height:1.5}.small-note{font-size:15px!important}.select-box{position:relative;margin-top:8px}.select-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid #d5d9df;border-radius:10px;background:#fff;font-size:18px;font-weight:600;color:#2e3238;cursor:pointer}.select-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:1px solid #d5d9df;border-radius:10px;box-shadow:0 10px 24px rgba(0,0,0,.08);overflow:hidden;z-index:10}.select-box.open .select-menu{display:block}.select-option{padding:12px 14px;border-bottom:1px solid #eceff3;cursor:pointer}.select-option:last-child{border-bottom:0}.select-option span{display:block;font-weight:700}.select-option small{color:#5f6670}.field-input{width:100%;padding:14px 16px;border:1px solid #d5d9df;border-radius:10px;background:#fff;font-size:18px;color:#2f3743}.@media(max-width:760px){.brandbar{padding:0 18px}.brand{font-size:24px}.main-nav a{font-size:18px;padding:14px 8px}.level-row{grid-template-columns:1fr;padding:18px 18px 20px}.rank{font-size:18px;text-align:left}.thumb{width:100%;max-width:300px}.level-copy h2{font-size:36px}.creator-line{font-size:18px}.roulette{grid-template-columns:1fr}.list-heading h1{font-size:24px}.page{width:min(100% - 20px,1160px)}}
+ .extended-level-row{grid-template-columns:300px minmax(0,1fr)}
+@media(max-width:760px){.extended-level-row{grid-template-columns:1fr}}
 </style>
 <style>
-.thumb{height:171px}.level-row{min-height:210px}@media(max-width:760px){.thumb{height:auto}.level-row{min-height:190px}}
-.sheet-cover{background-image:url('level-covers.png');background-size:600% 700%;background-position:var(--sheet-x) var(--sheet-y);background-repeat:no-repeat}.sheet-row:nth-child(5n){grid-template-columns:62px minmax(0,1fr) 300px}.sheet-row:nth-child(5n) .thumb{grid-column:3;grid-row:1}.sheet-row:nth-child(5n) .level-copy{grid-column:2;grid-row:1}@media(max-width:760px){.sheet-row:nth-child(5n){grid-template-columns:31px minmax(0,1fr)}.sheet-row:nth-child(5n) .thumb,.sheet-row:nth-child(5n) .level-copy{grid-column:2;grid-row:auto}}
-</style>
-<style>
-.sheet-row:nth-child(5n){grid-template-columns:62px 300px minmax(0,1fr)}.sheet-row:nth-child(5n) .thumb,.sheet-row:nth-child(5n) .level-copy{grid-column:auto;grid-row:auto}@media(max-width:760px){.sheet-row:nth-child(5n){grid-template-columns:31px minmax(0,1fr)}.sheet-row:nth-child(5n) .thumb,.sheet-row:nth-child(5n) .level-copy{grid-column:2;grid-row:auto}}
-.sheet-cover{background:none;height:auto;aspect-ratio:auto}.sheet-cover img{display:block;width:100%;height:auto;object-fit:contain}
+body {
+  background: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 13px;
+  color: #242424;
+}
+
+.level-name,
+.level-name * {
+  display: inline;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin: 0 0 6px 0;
+}
+
+.subtitle {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: #414141;
+  margin: 0;
+}
+
+.author {
+  font-weight: 900;
+  color: #242424;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #555555;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.level-row {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  min-height: 126px;
+  padding: 44px 0;
+  background: #fff;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.level-row:last-child {
+  border-bottom: none;
+}
+
+.rank-cell {
+  display: inline-block;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 900;
+  letter-spacing: inherit;
+  color: #1d1d1f;
+}
+
+.thumb {
+  width: 210px;
+  height: 92px;
+  border: 1px solid #d7d7d7;
+  background: #f4f4f4;
+  overflow: hidden;
+}
+
+.thumb img,
+.thumb svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.level-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.level-name {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+  font-weight: 900;
+  color: #242424;
+}
+
+.creator-line {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  color: #414141;
+  font-weight: 900;
+}
+
+.creator-link,
+.profile-link {
+  font: inherit;
+  font-weight: 900;
+  color: #242424;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #555555;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.profile-link {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.art-note {
+  display: none;
+}
+
+.extended-level-row {
+  grid-template-columns: 210px minmax(0, 1fr);
+}
+
+.extended-level-row .rank-cell {
+  display: none;
+}
+
+.extended-level-row .thumb {
+  width: 210px;
+}
+
+.extended-level-row .level-name {
+  font-size: 24px;
+}
+
+@media (max-width: 900px) {
+  .level-row {
+    grid-template-columns: 62px 170px minmax(0, 1fr);
+    gap: 14px;
+    min-height: 112px;
+    padding: 28px 0;
+  }
+
+  .thumb {
+    width: 170px;
+    height: 82px;
+  }
+
+  .level-name {
+    font-size: 22px;
+  }
+
+  .creator-line {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 8px;
+  }
+
+  .level-row,
+  .extended-level-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 0;
+  }
+
+  .rank-cell,
+  .extended-level-row .rank-cell {
+    display: none;
+  }
+
+  .thumb,
+  .extended-level-row .thumb {
+    width: 100%;
+    max-width: 260px;
+    height: 116px;
+  }
+
+  .level-name,
+  .extended-level-row .level-name {
+    font-size: 28px;
+  }
+
+  .creator-line {
+    font-size: 18px;
+  }
+}
+
+body {
+  padding: 0;
+}
+
+.page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+#main.section,
+#extended.section {
+  position: relative;
+  isolation: isolate;
+  padding: 20px 6px 30px;
+}
+
+#main.section::before,
+#main.section::after,
+#extended.section::before,
+#extended.section::after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  width: clamp(80px, calc((100vw - 1100px) / 2), 150px);
+  background-color: #168bc1;
+  background-image: url("side-pixels.svg");
+  background-size: 160px 800px;
+  background-repeat: repeat-y;
+  content: "";
+  pointer-events: none;
+}
+
+#main.section::before,
+#extended.section::before {
+  left: 0;
+}
+
+#main.section::after,
+#extended.section::after {
+  right: 0;
+  background-image: url("side-pixels-right.svg");
+}
+
+#main .list-surface,
+#extended .list-surface {
+  width: min(1100px, calc(100% - 160px));
+  margin-inline: auto;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+#main .side-note {
+  width: min(1100px, calc(100% - 160px));
+  margin-inline: auto;
+}
+
+#main .list-heading,
+#extended .list-heading {
+  margin: 0 0 28px;
+  padding: 0 40px 20px;
+}
+
+#main .level-row,
+#extended .level-row {
+  grid-template-columns: minmax(210px, 28vw) minmax(0, 1fr);
+  gap: 30px;
+  min-height: 0;
+  margin: 0 0 60px;
+  padding: 40px;
+  border: 1px dashed #d2d2d2;
+  background: #fff;
+}
+
+#main .level-row:last-child,
+#extended .level-row:last-child {
+  margin-bottom: 0;
+}
+
+#main .thumb,
+#extended .thumb {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+#main .level-name,
+#extended .level-name {
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+#main .rank-cell,
+#extended .rank-cell {
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+}
+
+#main .creator-line,
+#extended .creator-line {
+  margin-top: 0;
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.google-signin,
+.auth-overlay,
+.profile-overlay,
+#auth-status {
+  display: none !important;
+}
+
+.main-nav a {
+  font-weight: 900;
+  -webkit-text-stroke: 0.6px currentColor;
+}
+
+@media (max-width: 900px) {
+  #main .level-row,
+  #extended .level-row {
+    grid-template-columns: minmax(180px, 35vw) minmax(0, 1fr);
+    gap: 22px;
+    margin-bottom: 36px;
+    padding: 28px;
+  }
+
+  #main .level-name,
+  #extended .level-name {
+    font-size: 36px;
+  }
+
+  #main .creator-line,
+  #extended .creator-line {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 760px) {
+  #main.section::before,
+  #main.section::after,
+  #extended.section::before,
+  #extended.section::after {
+    width: 16px;
+    background-size: 160px 800px;
+  }
+
+  #main .list-surface,
+  #extended .list-surface,
+  #main .side-note {
+    width: calc(100% - 32px);
+  }
+
+  #main.section,
+  #extended.section {
+    padding: 16px 6px 24px;
+  }
+
+  #main .list-heading,
+  #extended .list-heading {
+    padding: 0 14px 16px;
+  }
+
+  #main .level-row,
+  #extended .level-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding: 18px;
+  }
+
+  #main .thumb,
+  #extended .thumb {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  #main .level-name,
+  #extended .level-name {
+    font-size: 30px;
+  }
+
+  #main .creator-line,
+  #extended .creator-line {
+    font-size: 19px;
+  }
+}
 </style>
 </head>
 <body>
-<header class="site-header"><div class="brandbar"><a class="brand" href="#main">GDVAULT<span>.STATS</span></a><div class="menu-icon" aria-label="Menu"><i></i><i></i><i></i></div></div><nav class="main-nav"><a class="active" href="#main">Main List</a><a href="#extended">Extended List</a><a href="#roulette">Roulette</a></nav></header><div class="blue-rule"></div>
+<header class="site-header"><div class="brandbar"><a class="brand" href="#main">GDVAULT<span>.STATS</span></a><div class="header-actions"><button class="google-signin" type="button"><span class="google-icon">G</span>Sign in</button><div class="menu-icon" aria-label="Menu"><i></i><i></i><i></i></div></div></div><nav class="main-nav"><a class="active" href="#main">Main List</a><a href="#extended">Extended List</a><a href="#submit">Submit</a><a href="#roulette">Roulette</a></nav></header><div class="blue-rule"></div>
 <main class="page">
-<section class="section active" id="main"><div class="list-surface"><div class="list-heading"><h1>Main List</h1><p>9-star levels followed by 8-star levels</p></div><div id="level-list"></div></div><aside class="side-note"><div><h2>Thank you for visiting GD Vault Stats</h2><p>Thanks to every creator, player, and friend who helped make this little Geometry Dash 1.1 list possible. Keep building, keep playing, and have fun.</p></div><a class="roblox-link" href="https://www.roblox.com/games/6160147794/Geometry-Dash-1-1" target="_blank" rel="noopener">Play Geometry Dash 1.1</a></aside></section>
-<section class="section" id="extended"><div class="coming"><h1>Extended List</h1><p>Coming soon.</p></div></section>
+<section class="section active" id="main"><div class="list-surface"><div class="list-heading"><h1>Main List</h1><p>Current GD Vault picks</p></div><div id="level-list"></div></div><aside class="side-note"><div><h2>Thank you for visiting GD Vault Stats</h2><p>Thanks to every creator, player, and friend who helped make this little Geometry Dash 1.1 list possible. Keep building, keep playing, and have fun.</p></div><a class="discord-link" href="https://discord.com/" target="_blank" rel="noopener"><span class="discord-icon" aria-hidden="true"></span>Join Discord</a><a class="roblox-link" href="https://www.roblox.com/games/6160147794/Geometry-Dash-1-1" target="_blank" rel="noopener">Play Geometry Dash 1.1</a></aside></section>
+<section class="section" id="extended"><div class="list-surface"><div class="list-heading"><h1>Extended List</h1><p>Older GD Vault entries</p></div><div id="extended-list"></div></div></section>
+<section class="section" id="submit"><div class="record-submission"><button class="record-close" type="button" aria-label="Close">×</button><h1>Record Submission</h1><div class="record-row record-field"><h2>Demon</h2><p>The demon the record was made on. Only demons in the top 150 are accepted. This excludes legacy demons!</p><div class="select-box" id="demon-select"><button class="select-trigger" type="button">Click to select <span>⌄</span></button><div class="select-menu" id="demon-menu"></div></div></div><div class="record-row record-field"><h2>Holder</h2><p>The player holding the record. Start typing to see suggestions of existing players. If this is your first submission, write your name, as you wish it to appear on the website, into the text field (ignoring any suggestions).</p><div class="select-box" id="holder-select"><button class="select-trigger" type="button">Start typing for suggestions... <span>⌄</span></button><div class="select-menu"><div class="select-option" data-user="Your user"><span>Your user</span></div></div></div></div><div class="record-row record-field"><h2>Progress</h2><p>The progress made as percentage. Only values greater than or equal to the demons record requirement and smaller than or equal to 100 are accepted!</p><input class="field-input" type="text" placeholder="e.g. '50', '98'" /></div><div class="record-row record-field"><h2>Video</h2><p>A proof video of the legitimacy of the given record. If the record was achieved on stream, but wasn't uploaded anywhere else, please provide a twitch link to that stream.</p><p class="small-note">Note: Please pay attention to only submit well-formed URLs!</p><input class="field-input" type="url" placeholder="e.g. https://youtu.be/cHEGAqOgddA" /></div></div></section>
 <section class="section" id="roulette"><div class="roulette"><div class="roulette-card"><h1>Level Roulette</h1><div class="roulette-level"><small>Current random level ID</small><strong id="roulette-id">—</strong><span id="roulette-progress">1% to beat</span></div><div class="progress-track"><i id="progress-bar"></i></div><div class="roulette-actions"><button id="try-again" type="button">Try again</button><button id="next-one" type="button">Next one (+1%)</button><button class="secondary" id="use-skip" type="button">Use 1 skip</button></div></div><aside class="roulette-help"><h2>Roulette rules</h2><p>The ID is random every time. “Try again” keeps your percentage. “Next one” adds 1%. You have three skips total.</p><p>Skips remaining: <span class="skip-count" id="skip-count">3</span></p></aside></div></section>
 </main>
+<div class="auth-overlay" id="auth-overlay"> <div class="auth-card"><div class="auth-header"><h3>Sign in</h3><button class="close-account" type="button" aria-label="Close">×</button></div><div class="account-list"><button class="account-item" type="button"><span class="left"><span class="account-avatar">G</span><span>Google account</span></span><span class="caret">›</span></button></div><div class="auth-footer">Use Google to sign in and save your profile.</div></div></div>
+<div class="profile-overlay" id="profile-overlay" aria-modal="true" role="dialog">
+<div class="profile-card">
+<form class="profile-form" id="profile-form">
+<h1>Your player profile</h1>
+<p class="lead">Your player name, country, flag, bio and tags will be public on the Players leaderboard. Your Google email stays private. <strong>Profile setup is required to join.</strong></p>
+<div class="form-group"><label class="label" for="player-name">Player name</label><div class="input-shell"><input id="player-name" type="text" value="TOP" /></div></div>
+<div class="form-group"><label class="label" for="country-name">Country or territory</label><div class="country-shell"><div class="country-row" style="width:100%"><span class="flag"></span><input id="country-name" type="text" value="Romania" /></div></div><p class="helper">Choose the country you want to represent. Its name and flag appear next to your name on the leaderboard.</p><div class="country-option"><span class="flag"></span><span>Romania</span></div></div>
+<div class="form-group"><label class="label" for="bio">About you <span style="font-weight:500;color:#5d646e">(optional)</span></label><div class="textarea-shell"><textarea id="bio" placeholder=""></textarea></div></div>
+<p id="profile-status" class="helper" role="status"></p>
+<div class="form-row"><button class="profile-submit" type="submit">Save profile</button></div>
+</form>
+</div>
+</div>
+<div id="auth-status" role="alert" style="display:none;position:fixed;top:16px;right:16px;z-index:1001;max-width:min(420px,calc(100% - 32px));padding:12px 16px;background:#fff;border:1px solid #d8d8d8;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);color:#29292d"></div>
 <div class="profile-modal" id="profile-modal"><div class="modal-card"><h2 id="modal-title">Profile</h2><p id="modal-copy"></p><button class="close-modal" type="button">Close</button></div></div>
 <script>
-const levels=[
-['Intergalactic Void','jarele78789','greg',9,'void'],['Crack Step 18','Mark5656011_friend','Mark_35',9,'crack'],['Glacier','PolyDashDev','Robtop',9,'glacier'],['Space Battle','PetsimXplayer19900','pet',9,'space'],['Hades','jarele78789','greg',9,'hades'],['Beyond the Hell','Mark5656011_friend','Mark_35',9,'hell'],['Bad Apple','Mark5656011_friend','Mark_35',9,'apple'],['Rockgamer Basic 1','Tank5m5','Rockgamer',9,'rock'],['SAKUPEN SMITE','FelipeFilip2010','FelipeFilip',9,'smite'],['Funky Punk','Jivchik83','',9,'funk'],['Exit53','sincara_davido','',9,'exit'],['Sakupen Reborn','FelipeFilip2010','FelipeFilip',9,'reborn'],['Your World Your Fame','Mark5656011_friend','Mark_35',9,'fame'],['Quiet','jarele78789','greg',9,'quiet'],['Spikez','Crazyfrontop','Yenzoo',9,'spike'],['The Darkness','kafaGD','Kagames',9,'dark'],['Roadmap to Heaven','Blue_BetterGD','BlueBetter',9,'road'],['Dark','mrdpikachu','',9,'dark2'],['Starry Night','nanaskyny','',9,'stars'],['Military Zone','PetsimXplayer19900','pet',9,'military'],['Ice Frost','NullZeroFate','Zero',9,'ice'],['Pad Hell','nanaskyny','',9,'pad'],['Null Point','KristWasBanned','KristOffScript',8,'null'],['TempoGenesis','Blue_BetterGD','BlueBetter',8,'tempo'],['Dark Memory','gdapdsa','D555py',8,'memory'],['Void Dungeon','yakemerald','',8,'dungeon'],['Adventure III','Mark5656011_friend','Mark_35',8,'adventure'],['Dog with Book II','yakemerald','',8,'dog'],['La Ruta','D555py','gdapdsa',8,'ruta'],['Area One','arupaka213','',8,'area'],['Mix Era','D555py','gdapdsa',8,'mix'],['The Darkness II','kafaGD','Kagames',8,'dark3'],['The Darkness III','kafaGD','Kagames',8,'dark4'],['Battle of The Shades','Blue_BetterGD','BlueBetter',8,'shades'],['History Book','sirrirrll','SRL',8,'book'],['Sweetest Jane','KristWasBanned','KristOffScript',8,'sweet'],['Violet Clouds','NullZeroFate','Zero',8,'violet'],['ReShaded','Datrix150','Datrix',8,'shade'],['Goober Level','Datrix150','Datrix',8,'goober'],['From Cave to City','nanaskyny','',8,'cave'],['Lukewarm','yakemerald','',8,'warm']];
-const palettes={void:['#111733','#825be8'],crack:['#10263f','#34c1d4'],glacier:['#17445b','#b8ffff'],space:['#25134d','#db67bc'],hades:['#451523','#f26b49'],hell:['#24152f','#bd4d89'],apple:['#24171a','#df9560'],rock:['#1b3a2a','#a8d45b'],smite:['#42153f','#e85cc5'],funk:['#552f19','#f2b75d'],exit:['#1c3240','#75d4e2'],reborn:['#2a1647','#e96bd1'],fame:['#164050','#58d4ba'],quiet:['#272a43','#b5b3e8'],spike:['#362117','#ecb84c'],dark:['#11121d','#756bb0'],road:['#1d5270','#e7c26c'],dark2:['#111c32','#5c8ef0'],stars:['#151c45','#7d63dc'],military:['#354426','#d19852'],ice:['#1d5970','#d6ffff'],pad:['#382035','#e879ae'],null:['#26364e','#84b9e9'],tempo:['#402144','#e87bb6'],memory:['#242b3a','#aab3cc'],dungeon:['#122f31','#55d0a8'],adventure:['#4a2b1b','#ecac5d'],dog:['#3e3425','#cba873'],ruta:['#302244','#b99ae5'],area:['#173e48','#59d2ca'],mix:['#49253e','#ed7eae'],dark3:['#22233b','#9c8bc9'],dark4:['#1a1b2a','#bd7aa1'],shades:['#242239','#c995dc'],book:['#49311e','#e2b36e'],sweet:['#402238','#ecaac5'],violet:['#30205c','#b18cff'],shade:['#213633','#82d1a6'],goober:['#2b5d32','#e3ed65'],cave:['#263d33','#91cf78'],warm:['#65352b','#ffc076']};
+const profileOverlay=document.getElementById('profile-overlay');
+const googleButton=document.querySelector('.google-signin');
+const authStatus=document.getElementById('auth-status');
+const profileStatus=document.getElementById('profile-status');
+const profileForm=document.getElementById('profile-form');
+const firebaseConfig={apiKey:'PASTE_FIREBASE_WEB_API_KEY',authDomain:'YOUR_FIREBASE_PROJECT_ID.firebaseapp.com',projectId:'YOUR_FIREBASE_PROJECT_ID',appId:'PASTE_FIREBASE_WEB_APP_ID'};
+const firebaseConfigured=Object.values(firebaseConfig).every(value=>value&&!value.includes('PASTE_')&&!value.includes('YOUR_'));
+let firebaseAuth=null;let playerProfiles=null;let signedInUser=null;
+const showAuthStatus=(message)=>{authStatus.textContent=message;authStatus.style.display='block';};
+if(firebaseConfigured&&window.firebase){firebase.initializeApp(firebaseConfig);firebaseAuth=firebase.auth();playerProfiles=firebase.firestore().collection('players');firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(error=>showAuthStatus(error.message));firebaseAuth.onAuthStateChanged(async user=>{signedInUser=user;if(!user){profileOverlay.classList.remove('open');googleButton.innerHTML='<span class="google-icon">G</span>Sign in';googleButton.classList.remove('signed-in');return;}googleButton.innerHTML='<span class="google-icon">G</span>'+(user.displayName||'Signed in');googleButton.classList.add('signed-in');profileOverlay.classList.add('open');try{const profile=await playerProfiles.doc(user.uid).get();if(profile.exists){profileOverlay.classList.remove('open');}else{document.getElementById('player-name').value=user.displayName||'';profileOverlay.classList.add('open');}}catch(error){profileStatus.textContent='Could not load your profile from Firestore: '+error.message;}});}
+googleButton.addEventListener('click',async()=>{if(!firebaseConfigured||!firebaseAuth){showAuthStatus('Firebase is not configured yet. Add your Firebase web app config in index.html, enable Google in Firebase Authentication, and open this site from localhost or your hosted domain.');return;}try{const provider=new firebase.auth.GoogleAuthProvider();provider.setCustomParameters({prompt:'select_account'});await firebaseAuth.signInWithPopup(provider);}catch(error){showAuthStatus('Google sign-in failed: '+error.message);}});
+profileForm.addEventListener('submit',async event=>{event.preventDefault();if(!signedInUser||!playerProfiles)return;const playerName=document.getElementById('player-name').value.trim();const country=document.getElementById('country-name').value.trim();const bio=document.getElementById('bio').value.trim();if(!playerName||!country){profileStatus.textContent='Enter a player name and country to continue.';return;}const saveButton=profileForm.querySelector('.profile-submit');saveButton.disabled=true;profileStatus.textContent='Saving your profile...';try{await playerProfiles.doc(signedInUser.uid).set({playerName,country,bio,photoURL:signedInUser.photoURL||null,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});profileStatus.textContent='';profileOverlay.classList.remove('open');googleButton.innerHTML='<span class="google-icon">G</span>'+playerName;}catch(error){profileStatus.textContent='Could not save your profile: '+error.message;}finally{saveButton.disabled=false;}});
+document.querySelector('.close-modal').addEventListener('click',()=>document.getElementById('profile-modal').classList.remove('open'));
+const levels=[['Intergalactic Void','jarele78789','greg',9,'void'],['Crack Step 18','Mark5656011_friend','Mark_35',9,'crack'],['Glacier','PolyDashDev','Robtop',9,'glacier'],['Space Battle','PetsimXplayer19900','pet',9,'space'],['Hades','jarele78789','greg',9,'hades'],['Beyond the Hell','Mark5656011_friend','Mark_35',9,'hell'],['Bad Apple','Mark5656011_friend','Mark_35',9,'apple'],['Rockgamer Basic 1','Tank5m5','Rockgamer',9,'rock'],['SAKUPEN SMITE','FelipeFilip2010','FelipeFilip',9,'smite'],['Funky Punk','Jivchik83','',9,'funk'],['Exit53','sincara_davido','',9,'exit'],['Sakupen Reborn','FelipeFilip2010','FelipeFilip',9,'reborn'],['Your World Your Fame','Mark5656011_friend','Mark_35',9,'fame'],['Quiet','jarele78789','greg',9,'quiet'],['Spikez','Crazyfrontop','Yenzoo',9,'spike'],['The Darkness','kafaGD','Kagames',9,'dark'],['Roadmap to Heaven','Blue_BetterGD','BlueBetter',9,'road'],['Dark','mrdpikachu','',9,'dark2'],['Starry Night','nanaskyny','',9,'stars'],['Military Zone','PetsimXplayer19900','pet',9,'military'],['Ice Frost','NullZeroFate','Zero',9,'ice'],['Pad Hell','nanaskyny','',9,'pad'],['Null Point','KristWasBanned','KristOffScript',8,'null'],['TempoGenesis','Blue_BetterGD','BlueBetter',8,'tempo'],['Dark Memory','gdapdsa','D555py',8,'memory'],['Void Dungeon','yakemerald','',8,'dungeon'],['Adventure III','Mark5656011_friend','Mark_35',8,'adventure'],['Dog with Book II','yakemerald','',8,'dog'],['La Ruta','D555py','gdapdsa',8,'ruta'],['Area One','arupaka213','',8,'area'],['Mix Era','D555py','gdapdsa',8,'mix'],['The Darkness II','kafaGD','Kagames',8,'dark3'],['The Darkness III','kafaGD','Kagames',8,'dark4'],['Battle of The Shades','Blue_BetterGD','BlueBetter',8,'shades'],['History Book','sirrirrll','SRL',8,'book'],['Sweetest Jane','KristWasBanned','KristOffScript',8,'sweet'],['Violet Clouds','NullZeroFate','Zero',8,'violet'],['ReShaded','Datrix150','Datrix',8,'shade'],['Goober Level','Datrix150','Datrix',8,'goober'],['From Cave to City','nanaskyny','',8,'cave'],['Lukewarm','yakemerald','',8,'warm']];
+const orderedLevels=[['Garden','Extreme','',0,'garden'],['Temu Tidal Wave','Tianlu','',0,'temu'],['Aqaba','Paxelon','',0,'aqaba'],['Extreme Demon','Peh','',0,'demon'],['Maybe Demon idk','DaSuperTurtle','',0,'maybe'],['Depression','ANormalPerson1','',0,'depression'],['Maybe Decorated idk','DaSuperTurtle','',0,'decorated'],['Falling in hell','DenGD','',0,'hell'],['The Demon','Pumpkinkanx','',0,'demon2'],['Bright Water','Mark_35','',0,'water'],['Pyrophobia','Top','',0,'pyro'],['Terabyte','Yakemerald','',0,'tera'],['No escape','Paxelon','',0,'escape'],['Purple Starfall','Bluetophat','',0,'star'],['Thorn','Tactical','',0,'thorn'],['Flashbang','Yakemerald','',0,'flash'],['Think It Over','TSG','',0,'think'],['Spikergeist','Ultral','',0,'geist']];
+const mainLevels=[...orderedLevels];
+const extendedLevels=[...levels];
+const palettes={void:['#111733','#825be8'],crack:['#10263f','#34c1d4'],glacier:['#17445b','#b8ffff'],space:['#25134d','#db67bc'],hades:['#451523','#f26b49'],hell:['#24152f','#bd4d89'],apple:['#24171a','#df9560'],rock:['#1b3a2a','#a8d45b'],smite:['#42153f','#e85cc5'],funk:['#552f19','#f2b75d'],exit:['#1c3240','#75d4e2'],reborn:['#2a1647','#e96bd1'],fame:['#164050','#58d4ba'],quiet:['#272a43','#b5b3e8'],spike:['#362117','#ecb84c'],dark:['#11121d','#756bb0'],road:['#1d5270','#e7c26c'],dark2:['#111c32','#5c8ef0'],stars:['#151c45','#7d63dc'],military:['#354426','#d19852'],ice:['#1d5970','#d6ffff'],pad:['#382035','#e879ae'],null:['#26364e','#84b9e9'],tempo:['#402144','#e87bb6'],memory:['#242b3a','#aab3cc'],dungeon:['#122f31','#55d0a8'],adventure:['#4a2b1b','#ecac5d'],dog:['#3e3425','#cba873'],ruta:['#302244','#b99ae5'],area:['#173e48','#59d2ca'],mix:['#49253e','#ed7eae'],dark3:['#22233b','#9c8bc9'],dark4:['#1a1b2a','#bd7aa1'],shades:['#242239','#c995dc'],book:['#49311e','#e2b36e'],sweet:['#402238','#ecaac5'],violet:['#30205c','#b18cff'],shade:['#213633','#82d1a6'],goober:['#2b5d32','#e3ed65'],cave:['#263d33','#91cf78'],warm:['#65352b','#ffc076'],garden:['#2a462d','#88d38d'],temu:['#1d3458','#7ad8ff'],aqaba:['#102f48','#7dbaf8'],demon:['#3b233f','#ff7f6f'],maybe:['#3b2d2b','#d7a86b'],depression:['#2a2f36','#a1b6d6'],decorated:['#3f2d33','#d98d9e'],water:['#123c56','#7ed5ec'],pyro:['#4f1918','#ff8c3a'],tera:['#1d1d3d','#7bc7ff'],escape:['#2d523d','#b3d58a'],star:['#3a2b57','#e7b2ff'],thorn:['#423f2a','#d4c071'],flash:['#1a1b2e','#ffb24a'],think:['#3d2b43','#d0a9ff'],geist:['#1f2d36','#7de2d3']};
 const artNotes=['deep-space signal','clubstep mischief','golden ice range','ufo star battle','underworld fire','devils beyond the gate','worm in the apple','gaming rock','sakupen inferno','dystopian skyline','emergency exit 53','reborn endscape','wealth above / sorrow below','quiet archive','three-spike jump','black and white demon','hell to heaven route','last light bulb','open moonlit sky','war room','frozen world','fire pad trial','empty point','time running out','fractured memory','cave expedition','lost city adventure','dog study session','brainrot route','area 1 or area 53?','happy hell mix','darkness monster II','darkness monster III','red-glove shadow match','history archive','sweet dream','violet cloud shelf','friendly beat-up shades','troll level','cave to city','angel mask / hidden devil'];
 const artColors=['#7158e8','#55cfe4','#d7f7ff','#f29de0','#ff7957','#d85796','#ffad68','#b6df70','#ef70d2','#f0b75d','#79dcf0','#ee83d5','#67ddc1','#c5c4ed','#f2c65b','#aaa9c9','#f3d17a','#9cb8ff','#a793ed','#d3a463','#d9ffff','#ef7b9f','#a9c7eb','#f09ac5','#bdc9de','#82d1af','#ecc16d','#ffd48a','#ce92e6','#79ded2','#ef93bc','#a99be4','#d58eb5','#f09393','#f0c179','#efb5d0','#c3a5ff','#8cd6ad','#ecdf72','#9bd883','#ffb978'];
-function cover(kind,name,index){const p=palettes[kind]||['#20254f','#6a8ee8'];let shape='';if(kind==='goober')shape='<circle cx="238" cy="43" r="31" fill="#d9ef65"/><path d="M0 128c43-54 70-5 101-56 33 47 65 0 103 50 30-48 64-48 96-8v36H0z" fill="#43894c"/><circle cx="91" cy="78" r="22" fill="#f6c44f"/><circle cx="84" cy="72" r="4"/><circle cx="98" cy="72" r="4"/><path d="M81 86q10 10 21 0" fill="none" stroke="#462b26" stroke-width="3"/>';else if(kind==='dog'||kind==='book')shape='<rect x="30" y="79" width="72" height="42" rx="3" fill="#e6aa54" transform="rotate(-12 30 79)"/><rect x="42" y="65" width="72" height="42" rx="3" fill="#efcf8a" transform="rotate(12 42 65)"/><path d="M150 126V58l30-25 30 25v68" fill="#273c66"/><circle cx="180" cy="67" r="12" fill="#ffd673"/>';else if(kind==='glacier'||kind==='ice')shape='<path d="M0 130L53 58l43 48 56-81 50 65 61-78 37 51v87H0z" fill="#baf7f4"/><path d="M0 130l55-39 41 26 56-39 50 29 62-47" fill="none" stroke="#fff" stroke-width="5"/><circle cx="47" cy="29" r="18" fill="#e9ffff" opacity=".8"/>';else if(kind==='space'||kind==='stars')shape='<circle cx="230" cy="46" r="35" fill="#f8c2e7"/><circle cx="239" cy="38" r="35" fill="'+p[0]+'"/><path d="M0 126l59-45 46 29 61-65 57 47 77-78v136H0z" fill="'+p[1]+'" opacity=".65"/><path d="M26 31l8 17 19 2-14 12 4 18-17-9-17 9 4-18L0 50l18-2z" fill="#fff"/>';else if(kind==='void'||kind==='dungeon'||kind==='cave')shape='<path d="M0 130L44 77l42 37 65-79 52 50 52-72 45 55v82H0z" fill="'+p[1]+'" opacity=".6"/><path d="M0 130l70-35 47 21 55-35 53 27 75-48" fill="none" stroke="#fff" stroke-width="4" opacity=".65"/><circle cx="227" cy="37" r="27" fill="#e5cbff" opacity=".75"/>';else if(kind==='hades'||kind==='hell'||kind==='smite')shape='<path d="M0 130q25-54 52 0 26-88 55 0 28-60 55 0 31-90 60 0 26-66 78 0v20H0z" fill="#ffbe58" opacity=".75"/><path d="M0 121h300" stroke="#fff1a4" stroke-width="4"/><circle cx="224" cy="40" r="28" fill="#ffdf72"/>';else if(kind==='apple')shape='<circle cx="214" cy="78" r="44" fill="#d94b43"/><path d="M219 37q11-25 30-24-4 21-25 29" fill="#75b65b"/><path d="M244 76q32-17 29 13-5 22-22 20" fill="none" stroke="#c9a06c" stroke-width="7"/><circle cx="271" cy="88" r="8" fill="#f1d0a1"/><circle cx="273" cy="86" r="2" fill="#222"/>';else if(kind==='rock')shape='<circle cx="93" cy="83" r="46" fill="#9b9fa5"/><path d="M56 61q37-34 73 0" fill="none" stroke="#e4e8ec" stroke-width="8"/><rect x="177" y="45" width="74" height="52" rx="4" fill="#b9e8ff"/><path d="M184 52h60v36h-60z" fill="#15223b"/><path d="M205 88h18" stroke="#fff" stroke-width="3"/>';else if(kind==='exit')shape='<rect x="211" y="25" width="62" height="103" fill="#273841"/><path d="M223 67h39" stroke="#ff716d" stroke-width="6"/><path d="M253 57l12 10-12 10" fill="none" stroke="#ff716d" stroke-width="5"/><circle cx="113" cy="55" r="13" fill="#fff"/><path d="M113 69v45m0-29-22 15m22-15 22 11m-22 18-18 23m18-23 23 20" fill="none" stroke="#fff" stroke-width="5"/>';else if(kind==='spike')shape='<path d="M0 132L55 56l55 76 55-76 55 76 55-76 25 36v36H0z" fill="#e9bd51"/><rect x="42" y="29" width="36" height="36" rx="5" fill="#65cbe1" transform="rotate(12 42 29)"/>';else if(kind==='military')shape='<path d="M0 129l30-63 48 30 45-70 54 59 57-40 66 45v42H0z" fill="#697050"/><path d="M40 92l58-29 38 23 55-30" fill="none" stroke="#e2c48c" stroke-width="6"/><circle cx="235" cy="34" r="23" fill="#f3d287" opacity=".6"/>';else if(kind==='road')shape='<path d="M0 128q53-44 99-26t95-37q51-29 106-44v107H0z" fill="#da6b52"/><path d="M14 128q51-44 96-26t95-37q51-29 95-44" fill="none" stroke="#fff0a0" stroke-width="5"/><circle cx="264" cy="29" r="20" fill="#fff3b1"/>';else if(kind==='dark'||kind==='dark2'||kind==='memory')shape='<rect x="182" y="36" width="74" height="75" rx="8" fill="#13151c" stroke="#ddd" stroke-width="3"/><path d="M218 55v24m-12-12h24" stroke="#fff" stroke-width="4"/><path d="M0 124l85-63 51 47 54-61 110 76H0z" fill="'+p[1]+'" opacity=".45"/>';else if(kind==='violet'||kind==='warm')shape='<path d="M0 111q40-36 76 0t76 0 76 0 72 0v39H0z" fill="#d9d4f6" opacity=".9"/><circle cx="225" cy="36" r="27" fill="#f5e7a5"/><path d="M205 83q22-31 45 0" fill="none" stroke="#39275e" stroke-width="5"/>';else shape='<path d="M0 129l64-55 48 43 62-82 53 65 48-49 25 34v65H0z" fill="'+p[1]+'" opacity=".68"/><circle cx="235" cy="39" r="26" fill="#f5d487"/><path d="M20 28h105M20 43h74" stroke="#fff" stroke-width="5" opacity=".6"/>';return `<svg viewBox="0 0 300 150" role="img" aria-label="Illustrated cover for ${name}" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g${index}" x2="1" y2="1"><stop stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient></defs><rect width="300" height="150" fill="url(#g${index})"/><path d="M0 16h300M0 32h300M0 48h300" stroke="#fff" stroke-opacity=".08"/>${shape}<path d="M0 143h300" stroke="#fff" stroke-opacity=".5"/><text x="14" y="137" fill="#fff" font-family="Georgia,serif" font-size="16" font-weight="bold">${name}</text></svg>`}
-const list=document.querySelector('#level-list'),modal=document.querySelector('#profile-modal');levels.forEach((level,index)=>{const[name,creator,profile,points,kind]=level,row=document.createElement('article');row.className='level-row';row.innerHTML=`<div class="rank">${index+1}</div><div class="thumb">${cover(kind,name,index)}<span class="art-note" style="--art-color:${artColors[index]}">${artNotes[index]}</span></div><div class="level-copy"><h2 class="level-name">${name}</h2><p class="creator-line">published by <a class="creator-link" href="#">${creator||'Unknown creator'}</a>${profile?` <span>·</span> <button class="profile-link" type="button" data-creator="${creator}" data-profile="${profile}">${profile}</button>`:''}</p><div class="points">${points}.00 (${points===9?100:88}%) — ${points===9?'450.00':'350.00'} (100%) points</div></div>`;list.appendChild(row)});document.querySelectorAll('.profile-link').forEach(button=>button.addEventListener('click',()=>{document.querySelector('#modal-title').textContent=button.dataset.profile;document.querySelector('#modal-copy').textContent=`${button.dataset.creator}'s in-game profile name is ${button.dataset.profile}.`;modal.classList.add('open')}));document.querySelector('.close-modal').addEventListener('click',()=>modal.classList.remove('open'));modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
-const sections=document.querySelectorAll('.section');document.querySelectorAll('.main-nav a').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();const id=link.getAttribute('href').slice(1);sections.forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.main-nav a').forEach(a=>a.classList.toggle('active',a===link));history.replaceState(null,'','#'+id);scrollTo({top:0,behavior:'smooth'})}));if(location.hash&&document.querySelector(location.hash))document.querySelector(`.main-nav a[href="${location.hash}"]`)?.click();
+function cover(kind,name,index){const p=palettes[kind]||['#20254f','#6a8ee8'];let shape='';if(kind==='goober')shape='<circle cx="238" cy="43" r="31" fill="#d9ef65"/><path d="M0 128c43-54 70-5 101-56 33 47 65 0 103 50 30-48 64-48 96-8v36H0z" fill="#43894c"/><circle cx="91" cy="78" r="22" fill="#f6c44f"/><circle cx="84" cy="72" r="4"/><circle cx="98" cy="72" r="4"/><path d="M81 86q10 10 21 0" fill="none" stroke="#462b26" stroke-width="3"/>';else if(kind==='dog'||kind==='book')shape='<rect x="30" y="79" width="72" height="42" rx="3" fill="#e6aa54" transform="rotate(-12 30 79)"/><rect x="42" y="65" width="72" height="42" rx="3" fill="#efcf8a" transform="rotate(12 42 65)"/><path d="M150 126V58l30-25 30 25v68" fill="#273c66"/><circle cx="180" cy="67" r="12" fill="#ffd673"/>';else if(kind==='glacier'||kind==='ice')shape='<path d="M0 130L53 58l43 48 56-81 50 65 61-78 37 51v87H0z" fill="#baf7f4"/><path d="M0 130l55-39 41 26 56-39 50 29 62-47" fill="none" stroke="#fff" stroke-width="5"/><circle cx="47" cy="29" r="18" fill="#e9ffff" opacity=".8"/>';else if(kind==='space'||kind==='stars')shape='<circle cx="230" cy="46" r="35" fill="#f8c2e7"/><circle cx="239" cy="38" r="35" fill="'+p[0]+'"/><path d="M0 126l59-45 46 29 61-65 57 47 77-78v136H0z" fill="'+p[1]+'" opacity=".65"/><path d="M26 31l8 17 19 2-14 12 4 18-17-9-17 9 4-18L0 50l18-2z" fill="#fff"/>';else if(kind==='void'||kind==='dungeon'||kind==='cave')shape='<path d="M0 130L44 77l42 37 65-79 52 50 52-72 45 55v82H0z" fill="'+p[1]+'" opacity=".6"/><path d="M0 130l70-35 47 21 55-35 53 27 75-48" fill="none" stroke="#fff" stroke-width="4" opacity=".65"/><circle cx="227" cy="37" r="27" fill="#e5cbff" opacity=".75"/>';else if(kind==='hades'||kind==='hell'||kind==='smite')shape='<path d="M0 130q25-54 52 0 26-88 55 0 28-60 55 0 31-90 60 0 26-66 78 0v20H0z" fill="#ffbe58" opacity=".75"/><path d="M0 121h300" stroke="#fff1a4" stroke-width="4"/><circle cx="224" cy="40" r="28" fill="#ffdf72"/>';else if(kind==='apple')shape='<circle cx="21" cy="52" r="18" fill="#ff6f61"/><path d="M21 70c20 0 38 24 39 52 0 32-15 48-39 48S0 154 0 120c0-29 18-50 39-50" fill="#d3d7b6"/><path d="M19 80c-20 10-43 42-38 62 5 17 22 25 42 21 17-4 31-17 36-33-11 2-20 0-27-8-7-9-12-24-13-42z" fill="#d9ff9d"/>';else if(kind==='rock')shape='<path d="M0 130L42 60l58 24 45-44 54 35 45-49 52 39v69H0z" fill="#d7d8a9" opacity=".8"/><path d="M90 54l13 19-13 20-13-20z" fill="#6f806a"/>';else if(kind==='fame'||kind==='road')shape='<path d="M0 120L94 34l58 56 55-88 73 76 20 40H0z" fill="#fff0b7" opacity=".8"/><path d="M0 130l84-40 68 29 73-57 75 49" fill="none" stroke="#fff" stroke-width="4" opacity=".75"/>';else if(kind==='quiet')shape='<path d="M0 128h300" stroke="#dfe5ff" stroke-width="4"/><circle cx="80" cy="55" r="20" fill="#cfcfff"/><circle cx="220" cy="60" r="23" fill="#b4d7ff"/>';else if(kind==='memory')shape='<path d="M0 125h300" stroke="#fff" stroke-width="5" opacity=".7"/><path d="M54 120V28l85 36 84-38v96" fill="none" stroke="#d8dcff" stroke-width="8"/><circle cx="67" cy="38" r="8" fill="#d9e1ff"/>';else if(kind==='warm')shape='<path d="M0 120l70-60 65 23 64-58 66 52 35-23v73H0z" fill="#f8c68b" opacity=".8"/><path d="M170 32l10 24 26 2-20 16 8 25-24-12-24 12 8-25-20-16 26-2z" fill="#fff5c3"/>';else if(kind==='dark')shape='<path d="M0 128h300" stroke="#fff" stroke-width="4" opacity=".35"/><circle cx="170" cy="60" r="50" fill="#9f8fe6" opacity=".55"/><circle cx="165" cy="65" r="89" fill="#2c3040"/>';else if(kind==='cave'||kind==='dungeon')shape='<path d="M0 132L44 86l48 31 74-73 66 35 68-61v82H0z" fill="#6ba899" opacity=".85"/><path d="M0 132l73-30 58 18 77-29 88 25z" fill="none" stroke="#e7fff9" stroke-width="5" opacity=".7"/>';else shape='<path d="M0 130L52 64l54 33 48-57 59 52 43-36 44 42v57H0z" fill="'+p[1]+'" opacity=".9"/><path d="M0 130l79-41 74 22 54-33 51 28 42-47" fill="none" stroke="#fff" stroke-width="4.5" opacity=".7"/>';
+return '<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+name+'"><defs><linearGradient id="g'+index+'" x1="0" x2="1"><stop offset="0%" stop-color="'+p[0]+'"/><stop offset="100%" stop-color="'+p[1]+'"/></linearGradient></defs><rect width="300" height="150" fill="url(#g'+index+')"/>'+shape+'</svg>';
+}
+const mainList=document.querySelector('#level-list'),extendedList=document.querySelector('#extended-list'),modal=document.querySelector('#profile-modal');const renderLevelRows=(container,items,isExtended=false)=>{container.innerHTML='';items.forEach((level,index)=>{const[name,creator,profile,points,kind]=level,row=document.createElement('article');row.className=isExtended?'level-row extended-level-row':'level-row';const rank=index+1;const officialCreator=isExtended?(profile||creator||'Unknown creator'):(creator||'Unknown creator');const creatorMarkup=isExtended?`<a class="creator-link" href="#">${officialCreator}</a>`:(creator?`<a class="creator-link" href="#">${creator}</a>`:'<span class="creator-link">Unknown creator</span>');const profileMarkup=!isExtended&&profile?` <span>·</span> <button class="profile-link" type="button" data-creator="${creator}" data-profile="${profile}">${profile}</button>`:'';let body='';if(isExtended&&index!==17){const coverIndex=index+1;body=`<div class="thumb"><img src="covers/${String(coverIndex).padStart(2,'0')}.png" alt="${name} cover"></div><div class="level-copy"><h2 class="level-name"><span class="rank-cell">#${rank}</span> ${name}</h2><p class="creator-line">published by ${creatorMarkup}</p></div>`;}else{body=`<div class="thumb">${cover(kind,name,index)}<span class="art-note">${artNotes[index]}</span></div><div class="level-copy"><h2 class="level-name"><span class="rank-cell">#${rank}</span> ${name}</h2><p class="creator-line">published by ${creatorMarkup}${profileMarkup}</p></div>`;}
+row.innerHTML=body;container.appendChild(row)});};renderLevelRows(mainList,mainLevels,false);renderLevelRows(extendedList,extendedLevels,true);document.querySelectorAll('.profile-link').forEach(button=>button.addEventListener('click',()=>{document.querySelector('#modal-title').textContent=button.dataset.profile;document.querySelector('#modal-copy').textContent=`${button.dataset.creator}'s in-game profile name is ${button.dataset.profile}.`;modal.classList.add('open')}));document.querySelector('.close-modal').addEventListener('click',()=>modal.classList.remove('open'));modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});const sections=document.querySelectorAll('.section');document.querySelectorAll('.main-nav a').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();const id=link.getAttribute('href').slice(1);sections.forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.main-nav a').forEach(a=>a.classList.toggle('active',a===link));history.replaceState(null,'','#'+id);scrollTo({top:0,behavior:'smooth'})}));if(location.hash&&document.querySelector(location.hash))document.querySelector(`.main-nav a[href="${location.hash}"]`)?.click();
 let progress=1,skips=3;const randomId=()=>Math.floor(Math.random()*16993)+8;const updateRoulette=()=>{document.querySelector('#roulette-id').textContent=randomId();document.querySelector('#roulette-progress').textContent=`${progress}% to beat`;document.querySelector('#progress-bar').style.width=`${progress}%`;document.querySelector('#skip-count').textContent=skips;document.querySelector('#use-skip').disabled=skips===0};document.querySelector('#try-again').addEventListener('click',()=>{progress=1;skips=3;updateRoulette()});document.querySelector('#next-one').addEventListener('click',()=>{progress=Math.min(progress+1,100);updateRoulette()});document.querySelector('#use-skip').addEventListener('click',()=>{if(skips>0){skips--;updateRoulette()}});updateRoulette();
 </script>
-<script>
-const sheetLevels = [
-	['Intergalactic Void','jarele78789','greg',9], ['Crack Step 18','Mark5656011_friend','Mark_35',9], ['Glacifire','PolyDashDev','Robtop',9], ['On Short','PetsimXplayer19900','pet',9], ['Gold Cold','jarele78789','greg',9], ['Hades','jarele78789','greg',9], ['Beyond Hell','Mark5656011_friend','Mark_35',9], ['Bad Apple','Mark5656011_friend','Mark_35',9], ['Rockgamer Basic 1','Tank5m5','Rockgamer',9], ['Sakupen Smite','FelipeFilip2010','FelipeFilip',9], ['Funky Punk','Jivchik83','',9], ['Exit 53','sincara_davido','',9], ['Sakupen Reborn','FelipeFilip2010','FelipeFilip',9], ['Your World Your Fame','Mark5656011_friend','Mark_35',9], ['Quiet','jarele78789','greg',9], ['Spikes','Crazyfrontop','Yenzoo',9], ['The Darkness','kafaGD','Kagames',9], ['Being Home','', '',9], ['Roadmap to Heaven','Blue_BetterGD','BlueBetter',9], ['Dark','mrdpikachu','',9], ['Starry Night','nanaskyny','',9], ['Military Zone','PetsimXplayer19900','pet',9], ['Ice Frost','NullZeroFate','Zero',9], ['Pad Hell','nanaskyny','',9], ['Null Point','KristWasBanned','KristOffScript',8], ['Tempogenesis','Blue_BetterGD','BlueBetter',8], ['Dark Memory','gdapdsa','D555py',8], ['Void Dungeon','yakemerald','',8], ['Adventure 3','Mark5656011_friend','Mark_35',8], ['Dog with Book II','yakemerald','',8], ['La Ruta','D555py','gdapdsa',8], ['Area One','arupaka213','',8], ['Mix Era','D555py','gdapdsa',8], ['The Darkness II','kafaGD','Kagames',8], ['The Darkness III','kafaGD','Kagames',8], ['Battle of the Shades','Blue_BetterGD','BlueBetter',8], ['History Book','sirrirrll','SRL',8], ['Violet Clouds','NullZeroFate','Zero',8], ['ReShaded','Datrix150','Datrix',8], ['Goober Level','Datrix150','Datrix',8], ['From Cave to City','nanaskyny','',8], ['Lukewarm','yakemerald','',8]
-];
-
-const sheetList = document.querySelector('#level-list');
-sheetList.innerHTML = '';
-sheetLevels.forEach((level, index) => {
-	const [name, creator, profile, points] = level;
-	const card = document.createElement('article');
-	card.className = 'level-row sheet-row';
-	const coverIndex = index + 1;
-	card.innerHTML = `<div class="rank">${index + 1}</div><div class="thumb sheet-cover" title="${name} cover"><img src="covers/${String(coverIndex).padStart(2, '0')}.png" alt="${name} cover"></div><div class="level-copy"><h2 class="level-name">${name}</h2><p class="creator-line">published by <a class="creator-link" href="#">${creator || 'Unknown creator'}</a>${profile ? ` <span>·</span> <button class="profile-link" type="button" data-creator="${creator}" data-profile="${profile}">${profile}</button>` : ''}</p><div class="points">${points}.00 (${points === 9 ? 100 : 88}%) — ${points === 9 ? '450.00' : '350.00'} (100%) points</div></div>`;
-	sheetList.appendChild(card);
-});
-
-document.querySelectorAll('.sheet-row .profile-link').forEach((button) => button.addEventListener('click', () => {
-	document.querySelector('#modal-title').textContent = button.dataset.profile;
-	document.querySelector('#modal-copy').textContent = `${button.dataset.creator}'s in-game profile name is ${button.dataset.profile}.`;
-	document.querySelector('#profile-modal').classList.add('open');
-}));
-</script>
 </body>
-<script>
-document.querySelectorAll('.level-name').forEach((title) => {
-	if (title.textContent === 'Crack Step 18') title.textContent = 'Crack Step';
-	if (title.textContent === 'Tempogenesis') title.textContent = 'Tempo Genesis';
-});
-</script>
 </html>
