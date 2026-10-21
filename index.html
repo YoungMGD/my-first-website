@@ -1,3 +1,6 @@
+mainLevels.splice(mainLevels.findIndex(level=>level[0]==='Extreme Demon')+1,0,['Going To Trip','wsppotborgdhere','',0,'trip']);
+mainLevels.splice(mainLevels.findIndex(level=>level[0]==='Maybe Demon idk')+1,0,['jkrak wave trials','Jkrak','',0,'jkrak']);
+mainLevels.splice(mainLevels.findIndex(level=>level[0]==='Terabyte')+1,0,['Dena X','Mark_35','',0,'denax']);
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,22 +19,49 @@ body:after{right:0;background-image:url('side-pixels-right.svg')}
 a{color:inherit}
 button,input,textarea{font:inherit}
 .site-header,.blue-rule,.page{position:relative;z-index:1}
-.site-header{background:#fff;border-bottom:1px solid #cfd3d8}
+.site-header{z-index:30;background:#fff;border-bottom:1px solid #cfd3d8}
 .brandbar{min-height:86px;padding:0 30px}
 .brand{color:#4b4b50;text-decoration:none;font-size:28px;font-weight:900;line-height:1}
 .brand span{color:#1685c6}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px}
 .google-signin{display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 12px;border:1px solid #d6d9df;border-radius:8px;background:#fff;color:#2f343d;font-size:14px;font-weight:700;white-space:nowrap;cursor:pointer}
 .google-icon{color:#4285f4;font-weight:900}
-.menu-icon{display:flex;align-items:center;justify-content:center;gap:4px;width:40px;height:40px;flex:none;cursor:pointer}
-.menu-icon i{display:block;width:4px;height:4px;border-radius:50%;background:#343941}
-.main-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #e3e5e8}
+.menu-icon{display:grid;place-content:center;gap:10px;width:68px;height:58px;flex:none;border:0;background:transparent;cursor:pointer}
+.site-header:not(.site-entered) .menu-icon{visibility:hidden}
+.menu-icon i{display:block;width:64px;height:8px;border-radius:5px;background:#c7c7c7;transition:transform .18s ease,opacity .18s ease}
+.menu-icon[aria-expanded="true"] i:first-child{transform:translateY(18px) rotate(45deg)}
+.menu-icon[aria-expanded="true"] i:nth-child(2){opacity:0}
+.menu-icon[aria-expanded="true"] i:last-child{transform:translateY(-18px) rotate(-45deg)}
+.menu-panel{position:absolute;top:calc(100% + 1px);right:20px;z-index:20;width:min(360px,calc(100vw - 32px));padding:16px 20px;background:#fff;border:1px solid #d9dde1;box-shadow:0 14px 36px rgba(25,38,48,.16)}
+.menu-panel[hidden]{display:none}
+.menu-panel h2{margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid #e1e4e7;font-size:17px;font-weight:800}
+.menu-panel a{display:block;padding:9px 0;color:#45464a;text-decoration:none;font-size:16px;font-weight:700}
+.menu-panel a:hover{color:#1685c6}
+.main-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:1120px;margin:0 auto;border-top:1px solid #e3e5e8}
+.site-header:not(.site-entered) .main-nav{display:none}
 .main-nav a{display:grid;place-items:center;min-height:58px;padding:8px 12px;color:#41454b;text-align:center;text-decoration:none;font-size:18px;font-weight:800;border-right:1px solid #edf0f2}
 .main-nav a:last-child{border-right:0}
 .main-nav a.active,.main-nav a:hover{color:#1685c6;background:#f7fbfe}
 .blue-rule{height:5px;background:#1685c6}
 .page{width:min(1200px,100%);margin:0 auto;padding:38px 24px 64px}
+.welcome{position:relative;z-index:1;min-height:calc(100vh - 91px);display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,7vh,76px) clamp(24px,5vw,72px) 44px;background:#fff}
+.welcome[hidden]{display:none}
+.welcome-title{margin:0 0 20px;color:#45464a;font-size:clamp(32px,4.5vw,58px);line-height:1.12;font-weight:800}
+.welcome-copy-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:36px;min-height:138px;margin:16px 0 20px;padding-left:20px;border-left:6px solid #1685c6}
+.welcome-copy{max-width:980px;margin:0;color:#4e5054;font-size:clamp(18px,2vw,28px);line-height:1.35;font-weight:400}
+.welcome-cta{display:inline-flex;align-items:center;justify-content:center;gap:18px;min-width:250px;min-height:112px;padding:20px 28px;background:#1186c5;color:#fff;text-decoration:none;font-size:22px;font-weight:500;transition:background .18s ease,transform .18s ease}
+.welcome-cta:hover{background:#096da5;transform:translateY(-2px)}
+.welcome-cta svg{width:28px;height:28px;flex:none}
+.welcome-categories{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.welcome-category{display:grid;justify-items:center;align-content:start;gap:8px;min-height:118px;padding:12px 8px;border:0;background:transparent;color:#45464a;font-weight:800;cursor:pointer;transition:color .16s ease,transform .16s ease}
+.welcome-category:hover{color:#1685c6;transform:translateY(-2px)}
+.welcome-category[aria-selected="true"]{color:#1685c6}
+.welcome-category span{font-size:clamp(17px,2vw,24px);line-height:1.2;text-align:center}
+.welcome-category svg{width:46px;height:46px;fill:currentColor}
+.welcome-category .icon-stroke{fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.welcome-category:focus-visible,.welcome-cta:focus-visible{outline:3px solid #f0ad24;outline-offset:4px}
 .section{display:none}
+body:not(.site-entered) .page{display:none}
 .section.active{display:block}
 .section#main.active{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start}
 .list-surface{min-width:0;width:100%;margin:0 auto}
@@ -85,10 +115,38 @@ button,input,textarea{font:inherit}
 .roulette-actions button:disabled{opacity:.45;cursor:not-allowed}
 .roulette-help{display:grid;gap:10px}
 .skip-count{font-weight:800;color:#1685c6}
+.stats-viewer{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
+.stats-players,.stats-filter{background:#fff;border:1px dashed #d2d2d2}
+.stats-players{min-height:540px;padding:24px}
+.stats-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #d4d4d4}
+.stats-heading h1{margin:0;font-size:28px;font-weight:800}
+.stats-count{color:#6b727a;font-size:14px}
+.stats-player-list{display:grid;gap:8px;max-height:650px;overflow:auto}
+.stats-player{display:grid;grid-template-columns:38px 40px minmax(0,1fr);align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #e7e9eb}
+.stats-player-rank{color:#66717b;font-weight:700;text-align:right}
+.stats-player-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#e8f2f8}
+.stats-player-initial{display:grid;place-items:center;color:#1685c6;font-weight:800}
+.stats-player-copy{min-width:0}
+.stats-player-name{display:block;overflow:hidden;color:#3f4449;font-size:16px;font-weight:800;text-overflow:ellipsis;white-space:nowrap}
+.stats-player-country{color:#6b727a;font-size:13px}
+.stats-filter-column{display:grid;gap:20px}
+.stats-filter{padding:20px}
+.stats-filter h2{margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid #d4d4d4;text-align:center;font-size:18px;font-weight:800}
+.stats-filter p{margin:0 0 14px;color:#60666d;text-align:center;font-size:14px;line-height:1.45}
+.stats-random-button{display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;padding:9px 12px;border:0;background:#1685c6;color:#fff;font-weight:800;cursor:pointer;transition:background .16s ease}
+.stats-random-button:hover{background:#096da5}
+.stats-random-button:focus-visible{outline:3px solid #f0ad24;outline-offset:3px}
+.stats-random-result{margin:12px 0 0!important;color:#1685c6!important;font-weight:800}
+.stats-random-result:empty{display:none}
+.nothing-toggle-row{display:flex;align-items:center;justify-content:center;gap:14px;min-height:48px;color:#4e5054;font-size:18px;font-style:italic}
+.nothing-toggle-row input{width:20px;height:20px;margin:0;accent-color:#1685c6;cursor:pointer}
+.stats-filter select,.country-shell select{width:100%;min-height:42px;padding:8px 10px;border:0;border-bottom:1px dotted #777;background:#fff;color:#45464a;font-weight:700;cursor:pointer}
+.stats-empty,.stats-status{padding:30px 12px;color:#656d75;text-align:center}
+.stats-error{color:#a33131}
 .profile-overlay.open{z-index:1000;padding:18px;overflow:auto}
 .profile-card{max-height:calc(100vh - 36px);overflow:auto}
 .input-shell,.country-shell,.textarea-shell{display:flex;min-height:46px;padding:0 12px;background:#fff}
-.input-shell input,.country-shell input,.textarea-shell textarea{width:100%;min-width:0;border:0;background:transparent;color:#24262b;font:inherit;outline:none}
+.input-shell input,.country-shell input,.country-shell select,.textarea-shell textarea{width:100%;min-width:0;border:0;background:transparent;color:#24262b;font:inherit;outline:none}
 .textarea-shell{min-height:100px;padding:10px 12px}
 .textarea-shell textarea{resize:vertical}
 .helper{margin:0;color:#67717a;font-size:14px;line-height:1.5}
@@ -98,8 +156,10 @@ button,input,textarea{font:inherit}
 .profile-modal{position:fixed;inset:0;z-index:1001;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(20,28,36,.45)}
 .modal-card{width:min(460px,100%);padding:24px;background:#fff;border:1px solid #d8dde2;box-shadow:0 18px 50px rgba(0,0,0,.2)}
 .close-modal{min-height:38px;padding:8px 14px;border:0;border-radius:6px;background:#1685c6;color:#fff;font-weight:700;cursor:pointer}
-@media(max-width:900px){body:before,body:after{width:72px;background-size:72px 360px}.section#main.active{grid-template-columns:minmax(0,1fr)}.side-note{position:static;grid-template-columns:1fr 1fr}.side-note>div{grid-column:1/-1}.side-note h2{font-size:18px}}
-@media(max-width:640px){body:before,body:after{display:none}.brandbar{min-height:68px;padding:0 14px}.brand{font-size:21px}.header-actions{gap:6px}.google-signin{min-height:36px;padding:6px 8px;font-size:12px}.menu-icon{width:32px;height:36px}.main-nav a{min-height:48px;padding:6px 3px;font-size:12px}.blue-rule{height:4px}.page{padding:24px 14px 44px}.list-heading{align-items:flex-start;flex-direction:column;gap:4px;margin-bottom:16px;padding-bottom:12px}.list-heading h1,.record-submission>h1,.roulette-card>h1{font-size:28px}.level-row{grid-template-columns:minmax(0,1fr);gap:14px;min-height:0;margin-bottom:14px;padding:14px}.thumb{max-height:210px}.level-name{font-size:25px}.creator-line{font-size:15px}.side-note{grid-template-columns:1fr;padding:16px}.side-note>div{grid-column:auto}.record-submission{padding:22px 16px}.roulette{grid-template-columns:minmax(0,1fr)}.roulette-card,.roulette-help{padding:18px}.profile-card{padding:22px 16px 14px}.profile-form h1{font-size:28px}.profile-form .lead{font-size:16px}.auth-status{left:16px;right:16px}}
+@media(max-width:900px){body:before,body:after{width:72px;background-size:72px 360px}.section#main.active{grid-template-columns:minmax(0,1fr)}.side-note{position:static;grid-template-columns:1fr 1fr}.side-note>div{grid-column:1/-1}.side-note h2{font-size:18px}.welcome{padding-right:34px;padding-left:34px}.welcome-copy-row{gap:20px}.welcome-cta{min-width:190px;padding:18px;font-size:19px}}
+@media(max-width:900px){.stats-viewer{grid-template-columns:minmax(0,1fr)}.stats-filter-column{grid-template-columns:repeat(2,minmax(0,1fr))}.stats-filter:last-child{grid-column:1/-1}}
+@media(max-width:640px){body:before,body:after{display:none}.brandbar{min-height:68px;padding:0 14px}.brand{font-size:21px}.header-actions{gap:6px}.google-signin{min-height:36px;padding:6px 8px;font-size:12px}.menu-icon{width:48px;height:44px;gap:7px}.menu-icon i{width:44px;height:6px}.menu-icon[aria-expanded="true"] i:first-child{transform:translateY(13px) rotate(45deg)}.menu-icon[aria-expanded="true"] i:last-child{transform:translateY(-13px) rotate(-45deg)}.main-nav a{min-height:52px;padding:8px 8px;font-size:14px}.blue-rule{height:4px}.page{padding:24px 14px 44px}.welcome{min-height:calc(100svh - 120px);justify-content:flex-start;padding:42px 20px 26px}.welcome-title{margin-bottom:14px;font-size:34px}.welcome-copy-row{grid-template-columns:minmax(0,1fr);gap:20px;min-height:0;margin:12px 0 12px;padding-left:14px}.welcome-copy{font-size:19px}.welcome-cta{justify-self:stretch;min-width:0;min-height:64px;padding:14px 18px;font-size:18px}.welcome-cta svg{width:24px;height:24px}.welcome-categories{gap:4px;margin-top:10px}.welcome-category{gap:7px;min-height:94px;padding:10px 3px}.welcome-category span{font-size:14px}.welcome-category svg{width:34px;height:34px}.list-heading{align-items:flex-start;flex-direction:column;gap:4px;margin-bottom:16px;padding-bottom:12px}.list-heading h1,.record-submission>h1,.roulette-card>h1{font-size:28px}.level-row{grid-template-columns:minmax(0,1fr);gap:14px;min-height:0;margin-bottom:14px;padding:14px}.thumb{max-height:210px}.level-name{font-size:25px}.creator-line{font-size:15px}.side-note{grid-template-columns:1fr;padding:16px}.side-note>div{grid-column:auto}.record-submission{padding:22px 16px}.roulette{grid-template-columns:minmax(0,1fr)}.roulette-card,.roulette-help{padding:18px}.profile-card{padding:22px 16px 14px}.profile-form h1{font-size:28px}.profile-form .lead{font-size:16px}.auth-status{left:16px;right:16px}}
+@media(max-width:640px){.stats-players{min-height:380px;padding:16px}.stats-heading h1{font-size:23px}.stats-filter-column{grid-template-columns:minmax(0,1fr)}.stats-filter:last-child{grid-column:auto}.stats-filter{padding:16px}.stats-player{grid-template-columns:30px 36px minmax(0,1fr);gap:9px;padding:9px 4px}.stats-player-avatar{width:36px;height:36px}}
 </style>
 </head>
 <body>
@@ -115,11 +175,33 @@ button,input,textarea{font:inherit}
 .auth-overlay,.profile-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(19,23,31,.14);z-index:999}.auth-overlay.open,.profile-overlay.open{display:flex}.auth-card,.profile-card{background:#f7f7f8;border:1px solid #dcdfe3;border-radius:16px;box-shadow:0 18px 40px rgba(22,27,35,.12)}.auth-card{width:min(520px,calc(100% - 32px));padding:22px 18px 18px}.auth-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.auth-header h3{margin:0;font-size:20px;letter-spacing:-.5px}.close-account{background:transparent;border:0;color:#666;font-size:26px;cursor:pointer;padding:0 4px}.account-list{display:grid;gap:10px;margin-top:10px}.account-item{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:#fff;border:1px solid #dfe2e6;border-radius:12px;padding:12px 14px;cursor:pointer;color:#23262a;font-size:17px;font-weight:600}.account-item .left{display:flex;align-items:center;gap:12px}.account-avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#5a7cff,#3ca1ff);font-size:12px;font-weight:800}.account-item small{display:block;color:#6a7077;font-weight:500}.account-item .caret{color:#6a7077;font-size:20px}.auth-footer{padding-top:8px;color:#4a5a66;font-size:14px}.auth-footer button{background:none;border:none;color:#1a73e8;font-weight:700;cursor:pointer;padding:0}.profile-card{width:min(920px,calc(100% - 32px));padding:28px 30px 16px;background:#f7f7f8}.profile-form{display:grid;gap:16px}.profile-form h1{margin:0;font-size:35px;line-height:1.05;letter-spacing:-1.3px;font-weight:900}.profile-form .lead{margin:0;color:#4f5359;font-size:21px;line-height:1.45;letter-spacing:-.6px;max-width:860px}.profile-form .lead strong{font-weight:800}.form-group{display:grid;gap:10px}.label{font-size:17px;font-weight:700;display:block}.input-shell,.country-shell{border:1px solid #d5d9df;border-radius:10px;background:#f5f7fa;padding:0 14px;height:52px;display:flex;align-items:center}.input-shell input,.country-shell input{width:100%;border:0;background:transparent;outline:none;font-size:18px;color:#2f3640;padding:0}.country-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.flag{width:24px;height:16px;border-radius:2px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);background:linear-gradient(90deg,#002b7f 0 33%,#f5d60d 33% 66%,#ce1126 66% 100%)}.helper{margin:0;color:#5d646e;font-size:17px;line-height:1.5}.country-option{display:inline-flex;align-items:center;gap:10px;margin-top:2px;margin-bottom:4px}.textarea-shell{border:1px solid #d5d9df;border-radius:10px;background:#f5f7fa;padding:10px 14px;min-height:110px}.textarea-shell textarea{width:100%;height:100%;min-height:100px;border:0;background:transparent;resize:none;outline:none;font:inherit;font-size:18px;color:#2f3640}.profile-submit{justify-self:end;background:#1d70d3;border:0;color:#fff;border-radius:10px;padding:12px 22px;font-size:18px;font-weight:700;cursor:pointer;margin-top:8px}.profile-submit:hover{background:#1659ad}.form-row{display:flex;align-items:center;justify-content:flex-end}@media(max-width:720px){.profile-form h1{font-size:28px}.profile-form .lead{font-size:18px}.profile-card{padding:22px 18px 14px}.label,.helper,.input-shell input,.textarea-shell textarea{font-size:16px}}</style>
 </head>
 <body>
-<header class="site-header"><div class="brandbar"><a class="brand" href="#main">GDVAULT<span>.STATS</span></a><div class="header-actions"><button class="google-signin" type="button"><span class="google-icon">G</span>Sign in with Google</button><div class="menu-icon" aria-label="Menu"><i></i><i></i><i></i></div></div></div><nav class="main-nav"><a class="active" href="#main">Main List</a><a href="#extended">Extended List</a><a href="#submit">Submit</a><a href="#roulette">Roulette</a></nav></header><div class="blue-rule"></div>
+<header class="site-header"><div class="brandbar"><a class="brand" href="#main">GDVAULT<span>.STATS</span></a><div class="header-actions"><button class="google-signin" type="button"><span class="google-icon">G</span>Sign in with Google</button><button class="menu-icon" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu"><i></i><i></i><i></i></button></div></div><nav class="main-nav"><a href="#main">Main List</a><a href="#extended">Extended List</a><a href="#stats">Stats Viewer</a></nav><div class="menu-panel" id="site-menu" hidden><h2>More</h2><a href="#roulette">Level Roulette</a><a href="#submit">Record Submitter</a></div></header><div class="blue-rule"></div>
+<section class="welcome" id="welcome" aria-labelledby="welcome-title">
+	<h1 class="welcome-title" id="welcome-title">Home of the GD Vault Stats Demonlist</h1>
+	<div class="welcome-copy-row">
+		<p class="welcome-copy" id="welcome-copy">The GD Vault Stats Demonlist is an accurate ranking of Geometry Dash 1.1's hardest demons, based on input from multiple players.</p>
+		<a class="welcome-cta" id="welcome-cta" href="#main">Check it out <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+	</div>
+	<div class="welcome-categories" role="tablist" aria-label="GD Vault Stats features">
+		<button class="welcome-category" type="button" role="tab" aria-controls="welcome-copy" aria-selected="true" data-category="ranking">
+			<span>Ranking</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 8h4v7h-4zM18 9h25v5H18zM10 21h4v7h-4zM18 22h25v5H18zM10 34h4v7h-4zM18 35h25v5H18z"/><path d="M5 15h2a2 2 0 1 1-2-2m0 15h2a2 2 0 1 1-2-2m0 15h2a2 2 0 1 1-2-2" class="icon-stroke"/></svg>
+		</button>
+		<button class="welcome-category" type="button" role="tab" aria-controls="welcome-copy" aria-selected="false" data-category="stats">
+			<span>Stats Viewer</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4a20 20 0 1 0 0 40 20 20 0 0 0 0-40Zm-3 4 3 2-2 3 3 2-1 4-4 1-2 4-4-1-2-4-4-2 2-5 4-1 2-3Zm10 29-2-5 2-4 4-2 3 3a16 16 0 0 1-7 8Zm5-17-4-2-1-5 3-2a16 16 0 0 1 4 9Z"/></svg>
+		</button>
+		<button class="welcome-category" type="button" role="tab" aria-controls="welcome-copy" aria-selected="false" data-category="records">
+			<span>Records</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 5h20v6h10v7c0 8-5 13-13 14a9 9 0 0 1-4 5v5h9v5H12v-5h9v-5a9 9 0 0 1-4-5C9 31 4 26 4 18v-7h10V5Zm-5 12v1c0 4 2 7 7 8V17H9Zm30 0h-7v9c5-1 7-4 7-8v-1Z"/></svg>
+		</button>
+		<button class="welcome-category" type="button" role="tab" aria-controls="welcome-copy" aria-selected="false" data-category="informative">
+			<span>Informative</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14Zm-8 19a2 2 0 0 0-2 2v4h4v10h-4v5h20v-5h-4V25a2 2 0 0 0-2-2H16Z"/></svg>
+		</button>
+	</div>
+</section>
 <main class="page">
-<section class="section active" id="main"><div class="list-surface"><div class="list-heading"><h1>Main List</h1><p>Current GD Vault picks</p></div><div id="level-list"></div></div><aside class="side-note"><div><h2>Thank you for visiting GD Vault Stats</h2><p>Thanks to every creator, player, and friend who helped make this little Geometry Dash 1.1 list possible. Keep building, keep playing, and have fun.</p></div><a class="discord-link" href="https://discord.com/" target="_blank" rel="noopener"><span class="discord-icon" aria-hidden="true"></span>Join Discord</a><a class="roblox-link" href="https://www.roblox.com/games/6160147794/Geometry-Dash-1-1" target="_blank" rel="noopener">Play Geometry Dash 1.1</a></aside></section>
+<section class="section" id="main"><div class="list-surface"><div class="list-heading"><h1>Main List</h1><p>Current GD Vault picks</p></div><div id="level-list"></div></div><aside class="side-note"><div><h2>Thank you for visiting GD Vault Stats</h2><p>Thanks to every creator, player, and friend who helped make this little Geometry Dash 1.1 list possible. Keep building, keep playing, and have fun.</p></div><a class="discord-link" href="https://discord.com/" target="_blank" rel="noopener"><span class="discord-icon" aria-hidden="true"></span>Join Discord</a><a class="roblox-link" href="https://www.roblox.com/games/6160147794/Geometry-Dash-1-1" target="_blank" rel="noopener">Play Geometry Dash 1.1</a></aside></section>
 <section class="section" id="extended"><div class="list-surface"><div class="list-heading"><h1>Extended List</h1><p>Older GD Vault entries</p></div><div id="extended-list"></div></div></section>
-<section class="section" id="submit"><div class="record-submission"><button class="record-close" type="button" aria-label="Close">×</button><h1>Record Submission</h1><div class="record-row record-field"><h2>Demon</h2><p>The demon the record was made on. Only demons in the top 150 are accepted. This excludes legacy demons!</p><div class="select-box" id="demon-select"><button class="select-trigger" type="button">Click to select <span>⌄</span></button><div class="select-menu" id="demon-menu"></div></div></div><div class="record-row record-field"><h2>Holder</h2><p>The player holding the record. Start typing to see suggestions of existing players. If this is your first submission, write your name, as you wish it to appear on the website, into the text field (ignoring any suggestions).</p><div class="select-box" id="holder-select"><button class="select-trigger" type="button">Start typing for suggestions... <span>⌄</span></button><div class="select-menu"><div class="select-option" data-user="Your user"><span>Your user</span></div></div></div></div><div class="record-row record-field"><h2>Progress</h2><p>The progress made as percentage. Only values greater than or equal to the demons record requirement and smaller than or equal to 100 are accepted!</p><input class="field-input" type="text" placeholder="e.g. '50', '98'" /></div><div class="record-row record-field"><h2>Video</h2><p>A proof video of the legitimacy of the given record. If the record was achieved on stream, but wasn't uploaded anywhere else, please provide a twitch link to that stream.</p><p class="small-note">Note: Please pay attention to only submit well-formed URLs!</p><input class="field-input" type="url" placeholder="e.g. https://youtu.be/cHEGAqOgddA" /></div></div></section>
+<section class="section" id="stats"><div class="stats-viewer"><div class="stats-players"><div class="stats-heading"><h1>Stats Viewer</h1><span class="stats-count" id="stats-count">0 players</span></div><div class="stats-player-list" id="stats-player-list" aria-live="polite"><p class="stats-status">Loading player profiles...</p></div></div><aside class="stats-filter-column"><section class="stats-filter"><h2>Demon Sorting</h2><p>Choose a demon from either list.</p><div class="select-box" id="stats-demon-select"><button class="select-trigger" type="button" aria-expanded="false">All demons <span>⌄</span></button><div class="select-menu" id="stats-demon-menu"></div></div></section><section class="stats-filter"><h2>Country</h2><p>Show players who selected a country in their profile.</p><select id="stats-country-filter" aria-label="Filter players by country"><option value="">All countries</option></select></section><section class="stats-filter"><h2>Players</h2><p>Google accounts appear here after their player profile has been saved. Emails stay private.</p></section><section class="stats-filter"><h2>Random</h2><p>Press at your own risk.</p><button class="stats-random-button" id="stats-random-button" type="button">Pick a player</button><p class="stats-random-result" id="stats-random-result" aria-live="polite"></p></section></aside></div></section>
+<section class="section" id="submit"><div class="record-submission"><button class="record-close" type="button" aria-label="Close">×</button><h1>Record Submitter</h1><div class="record-row record-field"><h2>Demon</h2><p>The demon the record was made on. Only demons in the top 150 are accepted. This excludes legacy demons!</p><div class="select-box" id="demon-select"><button class="select-trigger" type="button">Click to select <span>⌄</span></button><div class="select-menu" id="demon-menu"></div></div></div><div class="record-row record-field"><h2>Holder</h2><p>The player holding the record. Start typing to see suggestions of existing players. If this is your first submission, write your name, as you wish it to appear on the website, into the text field (ignoring any suggestions).</p><div class="select-box" id="holder-select"><button class="select-trigger" type="button">Start typing for suggestions... <span>⌄</span></button><div class="select-menu"><div class="select-option" data-user="Your user"><span>Your user</span></div></div></div></div><div class="record-row record-field"><h2>Progress</h2><p>The progress made as percentage. Only values greater than or equal to the demons record requirement and smaller than or equal to 100 are accepted!</p><input class="field-input" type="text" placeholder="e.g. '50', '98'" /></div><div class="record-row record-field"><h2>Video</h2><p>A proof video of the legitimacy of the given record. If the record was achieved on stream, but wasn't uploaded anywhere else, please provide a twitch link to that stream.</p><p class="small-note">Note: Please pay attention to only submit well-formed URLs!</p><input class="field-input" type="url" placeholder="e.g. https://youtu.be/cHEGAqOgddA" /></div></div></section>
 <section class="section" id="roulette"><div class="roulette"><div class="roulette-card"><h1>Level Roulette</h1><div class="roulette-level"><small>Current random level ID</small><strong id="roulette-id">—</strong><span id="roulette-progress">1% to beat</span></div><div class="progress-track"><i id="progress-bar"></i></div><div class="roulette-actions"><button id="try-again" type="button">Try again</button><button id="next-one" type="button">Next one (+1%)</button><button class="secondary" id="use-skip" type="button">Use 1 skip</button></div></div><aside class="roulette-help"><h2>Roulette rules</h2><p>The ID is random every time. “Try again” keeps your percentage. “Next one” adds 1%. You have three skips total.</p><p>Skips remaining: <span class="skip-count" id="skip-count">3</span></p></aside></div></section>
 </main>
 <div class="profile-overlay" id="profile-overlay" aria-modal="true" role="dialog">
@@ -135,9 +217,8 @@ button,input,textarea{font:inherit}
 
 			<div class="form-group">
 				<label class="label" for="country-name">Country or territory</label>
-				<div class="country-shell"><div class="country-row" style="width:100%"><span class="flag"></span><input id="country-name" type="text" value="Romania" /></div></div>
+				<div class="country-shell"><div class="country-row" style="width:100%"><select id="country-name" aria-label="Choose a country"></select></div></div>
 				<p class="helper">Choose the country you want to represent. Its name and flag appear next to your name on the leaderboard.</p>
-				<div class="country-option"><span class="flag"></span><span>Romania</span></div>
 			</div>
 
 			<div class="form-group">
@@ -158,10 +239,13 @@ button,input,textarea{font:inherit}
 .header-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px}
 .google-signin{display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 12px;border:1px solid #d6d9df;border-radius:8px;background:#fff;color:#2f343d;font-size:14px;font-weight:700;white-space:nowrap;cursor:pointer}
 .google-icon{font-weight:800;color:#4285f4}
-.menu-icon{display:flex;align-items:center;justify-content:center;gap:4px;width:40px;height:40px;flex:none;cursor:pointer}
-.menu-icon i{display:block;width:4px;height:4px;border-radius:50%;background:#343941}
-@media(max-width:480px){.brandbar{padding:0 12px;gap:8px}.brand{font-size:18px}.header-actions{gap:4px}.google-signin{min-height:34px;padding:5px 6px;font-size:10px}.menu-icon{width:28px;height:34px}}
-@media(max-width:340px){.brandbar{padding:0 8px;gap:5px}.brand{font-size:15px}.google-signin{gap:4px;padding:4px;font-size:9px}.header-actions{gap:3px}.menu-icon{width:24px}}
+.menu-icon{display:grid;place-content:center;gap:10px;width:68px;height:58px;flex:none;border:0;background:transparent;cursor:pointer}
+.menu-icon i{display:block;width:64px;height:8px;border-radius:5px;background:#c7c7c7;transition:transform .18s ease,opacity .18s ease}
+@media(max-width:480px){.brandbar{padding:0 12px;gap:8px}.brand{font-size:18px}.header-actions{gap:4px}.google-signin{min-height:34px;padding:5px 6px;font-size:10px}.menu-icon{width:48px;height:44px;gap:7px}.menu-icon i{width:44px;height:6px}.menu-icon[aria-expanded="true"] i:first-child{transform:translateY(13px) rotate(45deg)}.menu-icon[aria-expanded="true"] i:last-child{transform:translateY(-13px) rotate(-45deg)}}
+@media(max-width:340px){.brandbar{padding:0 8px;gap:5px}.brand{font-size:15px}.google-signin{gap:4px;padding:4px;font-size:9px}.header-actions{gap:3px}.menu-icon{width:28px;height:34px;gap:5px}.menu-icon i{width:24px;height:4px}.menu-icon[aria-expanded="true"] i:first-child{transform:translateY(9px) rotate(45deg)}.menu-icon[aria-expanded="true"] i:last-child{transform:translateY(-9px) rotate(-45deg)}}
+@media(max-width:640px){.welcome{padding-top:28px;padding-bottom:20px}.welcome-title{font-size:30px}.welcome-copy-row{gap:14px}.welcome-copy{font-size:17px}.welcome-cta{min-height:56px}.welcome-category{min-width:0;min-height:84px;gap:5px}.welcome-category span{max-width:100%;font-size:12px;overflow-wrap:anywhere}.welcome-category svg{width:30px;height:30px}}
+@media(max-width:340px){.welcome-category span{font-size:10px}}
+@media(max-width:340px){.welcome-category{min-height:78px}}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -187,6 +271,26 @@ const showAuthStatus=(message)=>{
 	authStatus.textContent=message;
 	authStatus.style.display='block';
 };
+const setGoogleButtonLabel=(label)=>{
+	const icon=document.createElement('span');
+	icon.className='google-icon';
+	icon.textContent='G';
+	googleButton.replaceChildren(icon,document.createTextNode(label));
+};
+const countryCodeList='AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW'.split(' ');
+const countryNames=new Intl.DisplayNames(['en'],{type:'region'});
+const countrySelect=document.getElementById('country-name');
+countrySelect.add(new Option('Choose a country',''));
+countryCodeList.map(code=>({code,name:countryNames.of(code)})).filter(country=>country.name!==country.code).sort((first,second)=>first.name.localeCompare(second.name)).forEach(country=>{
+	const option=document.createElement('option');
+	option.value=country.name;
+	option.textContent=country.name;
+	countrySelect.appendChild(option);
+});
+countrySelect.value='';
+let statsProfiles=[];
+let statsProfilesLoaded=false;
+let statsProfilesUnsubscribe=null;
 
 if(firebaseConfigured&&window.firebase){
 	firebase.initializeApp(firebaseConfig);
@@ -197,23 +301,25 @@ if(firebaseConfigured&&window.firebase){
 		signedInUser=user;
 		if(!user){
 			profileOverlay.classList.remove('open');
-			googleButton.innerHTML='<span class="google-icon">G</span>Sign in with Google';
+			setGoogleButtonLabel('Sign in with Google');
 			googleButton.classList.remove('signed-in');
 			return;
 		}
 
-		googleButton.innerHTML='<span class="google-icon">G</span>'+(user.displayName||'Signed in');
 		googleButton.classList.add('signed-in');
-		profileOverlay.classList.add('open');
 		try{
 			const profile=await playerProfiles.doc(user.uid).get();
 			if(profile.exists){
+				const profileData=profile.data();
+				setGoogleButtonLabel(profileData.playerName||user.displayName||'Signed in');
 				profileOverlay.classList.remove('open');
 			}else{
+				setGoogleButtonLabel(user.displayName||'Finish profile');
 				document.getElementById('player-name').value=user.displayName||'';
 				profileOverlay.classList.add('open');
 			}
 		}catch(error){
+			setGoogleButtonLabel(user.displayName||'Signed in');
 			profileStatus.textContent='Could not load your profile from Firestore: '+error.message;
 		}
 	});
@@ -256,7 +362,7 @@ profileForm.addEventListener('submit',async event=>{
 		},{merge:true});
 		profileStatus.textContent='';
 		profileOverlay.classList.remove('open');
-		googleButton.innerHTML='<span class="google-icon">G</span>'+playerName;
+		setGoogleButtonLabel(playerName);
 	}catch(error){
 		profileStatus.textContent='Could not save your profile: '+error.message;
 	}finally{
@@ -274,7 +380,178 @@ const artColors=['#7158e8','#55cfe4','#d7f7ff','#f29de0','#ff7957','#d85796','#f
 function cover(kind,name,index){const p=palettes[kind]||['#20254f','#6a8ee8'];let shape='';if(kind==='goober')shape='<circle cx="238" cy="43" r="31" fill="#d9ef65"/><path d="M0 128c43-54 70-5 101-56 33 47 65 0 103 50 30-48 64-48 96-8v36H0z" fill="#43894c"/><circle cx="91" cy="78" r="22" fill="#f6c44f"/><circle cx="84" cy="72" r="4"/><circle cx="98" cy="72" r="4"/><path d="M81 86q10 10 21 0" fill="none" stroke="#462b26" stroke-width="3"/>';else if(kind==='dog'||kind==='book')shape='<rect x="30" y="79" width="72" height="42" rx="3" fill="#e6aa54" transform="rotate(-12 30 79)"/><rect x="42" y="65" width="72" height="42" rx="3" fill="#efcf8a" transform="rotate(12 42 65)"/><path d="M150 126V58l30-25 30 25v68" fill="#273c66"/><circle cx="180" cy="67" r="12" fill="#ffd673"/>';else if(kind==='glacier'||kind==='ice')shape='<path d="M0 130L53 58l43 48 56-81 50 65 61-78 37 51v87H0z" fill="#baf7f4"/><path d="M0 130l55-39 41 26 56-39 50 29 62-47" fill="none" stroke="#fff" stroke-width="5"/><circle cx="47" cy="29" r="18" fill="#e9ffff" opacity=".8"/>';else if(kind==='space'||kind==='stars')shape='<circle cx="230" cy="46" r="35" fill="#f8c2e7"/><circle cx="239" cy="38" r="35" fill="'+p[0]+'"/><path d="M0 126l59-45 46 29 61-65 57 47 77-78v136H0z" fill="'+p[1]+'" opacity=".65"/><path d="M26 31l8 17 19 2-14 12 4 18-17-9-17 9 4-18L0 50l18-2z" fill="#fff"/>';else if(kind==='void'||kind==='dungeon'||kind==='cave')shape='<path d="M0 130L44 77l42 37 65-79 52 50 52-72 45 55v82H0z" fill="'+p[1]+'" opacity=".6"/><path d="M0 130l70-35 47 21 55-35 53 27 75-48" fill="none" stroke="#fff" stroke-width="4" opacity=".65"/><circle cx="227" cy="37" r="27" fill="#e5cbff" opacity=".75"/>';else if(kind==='hades'||kind==='hell'||kind==='smite')shape='<path d="M0 130q25-54 52 0 26-88 55 0 28-60 55 0 31-90 60 0 26-66 78 0v20H0z" fill="#ffbe58" opacity=".75"/><path d="M0 121h300" stroke="#fff1a4" stroke-width="4"/><circle cx="224" cy="40" r="28" fill="#ffdf72"/>';else if(kind==='apple')shape='<circle cx="214" cy="78" r="44" fill="#d94b43"/><path d="M219 37q11-25 30-24-4 21-25 29" fill="#75b65b"/><path d="M244 76q32-17 29 13-5 22-22 20" fill="none" stroke="#c9a06c" stroke-width="7"/><circle cx="271" cy="88" r="8" fill="#f1d0a1"/><circle cx="273" cy="86" r="2" fill="#222"/>';else if(kind==='rock')shape='<circle cx="93" cy="83" r="46" fill="#9b9fa5"/><path d="M56 61q37-34 73 0" fill="none" stroke="#e4e8ec" stroke-width="8"/><rect x="177" y="45" width="74" height="52" rx="4" fill="#b9e8ff"/><path d="M184 52h60v36h-60z" fill="#15223b"/><path d="M205 88h18" stroke="#fff" stroke-width="3"/>';else if(kind==='exit')shape='<rect x="211" y="25" width="62" height="103" fill="#273841"/><path d="M223 67h39" stroke="#ff716d" stroke-width="6"/><path d="M253 57l12 10-12 10" fill="none" stroke="#ff716d" stroke-width="5"/><circle cx="113" cy="55" r="13" fill="#fff"/><path d="M113 69v45m0-29-22 15m22-15 22 11m-22 18-18 23m18-23 23 20" fill="none" stroke="#fff" stroke-width="5"/>';else if(kind==='spike')shape='<path d="M0 132L55 56l55 76 55-76 55 76 55-76 25 36v36H0z" fill="#e9bd51"/><rect x="42" y="29" width="36" height="36" rx="5" fill="#65cbe1" transform="rotate(12 42 29)"/>';else if(kind==='military')shape='<path d="M0 129l30-63 48 30 45-70 54 59 57-40 66 45v42H0z" fill="#697050"/><path d="M40 92l58-29 38 23 55-30" fill="none" stroke="#e2c48c" stroke-width="6"/><circle cx="235" cy="34" r="23" fill="#f3d287" opacity=".6"/>';else if(kind==='road')shape='<path d="M0 128q53-44 99-26t95-37q51-29 106-44v107H0z" fill="#da6b52"/><path d="M14 128q51-44 96-26t95-37q51-29 95-44" fill="none" stroke="#fff0a0" stroke-width="5"/><circle cx="264" cy="29" r="20" fill="#fff3b1"/>';else if(kind==='dark'||kind==='dark2'||kind==='memory')shape='<rect x="182" y="36" width="74" height="75" rx="8" fill="#13151c" stroke="#ddd" stroke-width="3"/><path d="M218 55v24m-12-12h24" stroke="#fff" stroke-width="4"/><path d="M0 124l85-63 51 47 54-61 110 76H0z" fill="'+p[1]+'" opacity=".45"/>';else if(kind==='violet'||kind==='warm')shape='<path d="M0 111q40-36 76 0t76 0 76 0 72 0v39H0z" fill="#d9d4f6" opacity=".9"/><circle cx="225" cy="36" r="27" fill="#f5e7a5"/><path d="M205 83q22-31 45 0" fill="none" stroke="#39275e" stroke-width="5"/>';else shape='<path d="M0 129l64-55 48 43 62-82 53 65 48-49 25 34v65H0z" fill="'+p[1]+'" opacity=".68"/><circle cx="235" cy="39" r="26" fill="#f5d487"/><path d="M20 28h105M20 43h74" stroke="#fff" stroke-width="5" opacity=".6"/>';return `<svg viewBox="0 0 300 150" role="img" aria-label="Illustrated cover for ${name}" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g${index}" x2="1" y2="1"><stop stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient></defs><rect width="300" height="150" fill="url(#g${index})"/><path d="M0 16h300M0 32h300M0 48h300" stroke="#fff" stroke-opacity=".08"/>${shape}<path d="M0 143h300" stroke="#fff" stroke-opacity=".5"/><text x="14" y="137" fill="#fff" font-family="Georgia,serif" font-size="16" font-weight="bold">${name}</text></svg>`}
 const mainList=document.querySelector('#level-list'),extendedList=document.querySelector('#extended-list'),modal=document.querySelector('#profile-modal');const renderLevelRows=(container,items,isExtended=false)=>{container.innerHTML='';items.forEach((level,index)=>{const[name,creator,profile,points,kind]=level,row=document.createElement('article');row.className='level-row';if(isExtended){const coverIndex=index+1;row.innerHTML=`<div class="thumb"><img src="covers/${String(coverIndex).padStart(2,'0')}.png" alt="${name} cover" style="display:block;width:100%;height:100%;object-fit:cover;"></div><div class="level-copy"><h2 class="level-name">${name}</h2><p class="creator-line">published by <a class="creator-link" href="#">${creator||'Unknown creator'}</a>${profile?` <span>·</span> <button class="profile-link" type="button" data-creator="${creator}" data-profile="${profile}">${profile}</button>`:''}</p></div>`;}else{row.innerHTML=`<div class="thumb">${cover(kind,name,index)}<span class="art-note" style="--art-color:${artColors[index]}">${artNotes[index]}</span></div><div class="level-copy"><h2 class="level-name">#${index+1} - ${name}</h2><p class="creator-line">published by <a class="creator-link" href="#">${creator||'Unknown creator'}</a>${profile?` <span>·</span> <button class="profile-link" type="button" data-creator="${creator}" data-profile="${profile}">${profile}</button>`:''}</p></div>`;}container.appendChild(row)});};renderLevelRows(mainList,mainLevels,false);renderLevelRows(extendedList,extendedLevels,true);document.querySelectorAll('.profile-link').forEach(button=>button.addEventListener('click',()=>{document.querySelector('#modal-title').textContent=button.dataset.profile;document.querySelector('#modal-copy').textContent=`${button.dataset.creator}'s in-game profile name is ${button.dataset.profile}.`;modal.classList.add('open')}));document.querySelector('.close-modal').addEventListener('click',()=>modal.classList.remove('open'));modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
 const demonMenu=document.querySelector('#demon-menu');mainLevels.forEach((level,index)=>{const option=document.createElement('div');option.className='select-option';option.innerHTML=`<span>#${index+1} - ${level[0]}</span><small>published by ${level[1]}</small>`;option.addEventListener('click',()=>{const trigger=document.querySelector('#demon-select .select-trigger');trigger.innerHTML=`<span>${option.innerText.replace(/\s+/g,' ').trim()}</span><span>⌄</span>`;document.querySelector('#demon-select').classList.remove('open');});demonMenu.appendChild(option);});document.querySelector('#demon-select .select-trigger').addEventListener('click',()=>document.querySelector('#demon-select').classList.toggle('open'));document.querySelector('#holder-select .select-trigger').addEventListener('click',()=>document.querySelector('#holder-select').classList.toggle('open'));
-const sections=document.querySelectorAll('.section');document.querySelectorAll('.main-nav a').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();const id=link.getAttribute('href').slice(1);sections.forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.main-nav a').forEach(a=>a.classList.toggle('active',a===link));history.replaceState(null,'','#'+id);scrollTo({top:0,behavior:'smooth'})}));if(location.hash&&document.querySelector(location.hash))document.querySelector(`.main-nav a[href="${location.hash}"]`)?.click();
+const statsDemonMenu=document.querySelector('#stats-demon-menu');
+const statsDemonTrigger=document.querySelector('#stats-demon-select .select-trigger');
+const addDemonOptions=(label,demonList)=>{
+	const heading=document.createElement('div');
+	heading.className='select-option';
+	heading.textContent=label;
+	heading.style.fontWeight='800';
+	heading.style.background='#f1f5f8';
+	heading.setAttribute('aria-hidden','true');
+	statsDemonMenu.appendChild(heading);
+	demonList.forEach((demon,index)=>{
+		const option=document.createElement('div');
+		option.className='select-option';
+		option.textContent=`#${index+1} - ${demon[0]}`;
+		option.setAttribute('role','option');
+		option.tabIndex=0;
+		option.addEventListener('click',()=>{
+			statsDemonTrigger.replaceChildren(document.createTextNode(option.textContent),Object.assign(document.createElement('span'),{textContent:'⌄'}));
+			statsDemonMenu.parentElement.classList.remove('open');
+			statsDemonTrigger.setAttribute('aria-expanded','false');
+		});
+		option.addEventListener('keydown',event=>{
+			if(event.key==='Enter'||event.key===' '){event.preventDefault();option.click();}
+		});
+		statsDemonMenu.appendChild(option);
+	});
+};
+addDemonOptions('Main List',mainLevels);
+addDemonOptions('Extended List',extendedLevels);
+statsDemonTrigger.addEventListener('click',()=>{
+	const isOpen=statsDemonMenu.parentElement.classList.toggle('open');
+	statsDemonTrigger.setAttribute('aria-expanded',String(isOpen));
+});
+const statsPlayerList=document.querySelector('#stats-player-list');
+const statsCountryFilter=document.querySelector('#stats-country-filter');
+const statsCount=document.querySelector('#stats-count');
+const countryFlag=country=>{
+	const match=countryCodeList.find(code=>countryNames.of(code)===country);
+	return match?String.fromCodePoint(...[...match].map(character=>127397+character.charCodeAt(0))):'';
+};
+countryCodeList.map(code=>({code,name:countryNames.of(code)})).filter(country=>country.name!==country.code).sort((first,second)=>first.name.localeCompare(second.name)).forEach(country=>{
+	statsCountryFilter.add(new Option(`${countryFlag(country.name)} ${country.name}`,country.name));
+});
+const renderStatsProfiles=()=>{
+	const selectedCountry=statsCountryFilter.value;
+	const visibleProfiles=statsProfiles.filter(profile=>!selectedCountry||profile.country===selectedCountry).sort((first,second)=>(first.playerName||'').localeCompare(second.playerName||''));
+	statsCount.textContent=`${visibleProfiles.length} ${visibleProfiles.length===1?'player':'players'}`;
+	statsPlayerList.replaceChildren();
+	if(!visibleProfiles.length){
+		const empty=document.createElement('p');
+		empty.className='stats-empty';
+		empty.textContent=statsProfilesLoaded?'No player profiles match this country yet.':'No saved player profiles yet.';
+		statsPlayerList.appendChild(empty);
+		return;
+	}
+	visibleProfiles.forEach((profile,index)=>{
+		const row=document.createElement('article');
+		row.className='stats-player';
+		const rank=document.createElement('span');
+		rank.className='stats-player-rank';
+		rank.textContent=`#${index+1}`;
+		const avatar=profile.photoURL?document.createElement('img'):document.createElement('span');
+		avatar.className=profile.photoURL?'stats-player-avatar':'stats-player-avatar stats-player-initial';
+		if(profile.photoURL){avatar.src=profile.photoURL;avatar.alt='';}else avatar.textContent=(profile.playerName||'?').trim().slice(0,1).toUpperCase();
+		const copy=document.createElement('div');
+		copy.className='stats-player-copy';
+		const name=document.createElement('span');
+		name.className='stats-player-name';
+		name.textContent=profile.playerName||'Player';
+		const country=document.createElement('span');
+		country.className='stats-player-country';
+		country.textContent=`${countryFlag(profile.country||'')} ${profile.country||'Country not set'}`.trim();
+		copy.append(name,country);
+		row.append(rank,avatar,copy);
+		statsPlayerList.appendChild(row);
+	});
+};
+const loadStatsProfiles=async()=>{
+	if(statsProfilesUnsubscribe){return;}
+	if(!playerProfiles){statsPlayerList.innerHTML='<p class="stats-status stats-error">Player profiles are unavailable because Firebase is not configured.</p>';return;}
+	statsPlayerList.innerHTML='<p class="stats-status">Loading player profiles...</p>';
+	try{
+		statsProfilesUnsubscribe=playerProfiles.onSnapshot(snapshot=>{
+		statsProfiles=snapshot.docs.map(document=>document.data()).filter(profile=>profile.playerName&&profile.country);
+		statsProfilesLoaded=true;
+		renderStatsProfiles();
+		},error=>{
+			statsProfilesUnsubscribe=null;
+		statsPlayerList.innerHTML='';
+		const message=document.createElement('p');
+		message.className='stats-status stats-error';
+		message.textContent=`Could not load player profiles: ${error.message}`;
+		statsPlayerList.appendChild(message);
+		});
+	}catch(error){
+		statsProfilesUnsubscribe=null;
+		statsPlayerList.innerHTML='';
+		const message=document.createElement('p');
+		message.className='stats-status stats-error';
+		message.textContent=`Could not load player profiles: ${error.message}`;
+		statsPlayerList.appendChild(message);
+	}
+};
+statsCountryFilter.addEventListener('change',renderStatsProfiles);
+document.querySelector('#stats-random-button').addEventListener('click',()=>{
+	const selectedCountry=statsCountryFilter.value;
+	const eligibleProfiles=statsProfiles.filter(profile=>profile.playerName&&(!selectedCountry||profile.country===selectedCountry));
+	const result=document.querySelector('#stats-random-result');
+	if(!eligibleProfiles.length){
+		result.textContent='No players are available for this country yet.';
+		return;
+	}
+	const picked=eligibleProfiles[Math.floor(Math.random()*eligibleProfiles.length)];
+	result.textContent=`${countryFlag(picked.country||'')} ${picked.playerName}`.trim();
+});
+const sections=document.querySelectorAll('.section');
+const welcomeScreen=document.querySelector('#welcome');
+const siteHeader=document.querySelector('.site-header');
+const navLinks=[...document.querySelectorAll('.main-nav a')];
+const showSection=(id,updateUrl=true)=>{
+	const section=document.getElementById(id);
+	const activeLink=navLinks.find(link=>link.getAttribute('href')===`#${id}`);
+	if(!section)return;
+	siteHeader.classList.add('site-entered');
+	document.body.classList.add('site-entered');
+	welcomeScreen.hidden=true;
+	sections.forEach(item=>item.classList.toggle('active',item===section));
+	navLinks.forEach(link=>link.classList.toggle('active',link===activeLink));
+	document.querySelector('#site-menu').hidden=true;
+	document.querySelector('.menu-icon').setAttribute('aria-expanded','false');
+	document.querySelector('.menu-icon').setAttribute('aria-label','Open menu');
+	if(id==='stats')loadStatsProfiles();
+	if(updateUrl)history.replaceState(null,'',`#${id}`);
+	scrollTo({top:0,behavior:'smooth'});
+};
+navLinks.forEach(link=>link.addEventListener('click',event=>{
+	event.preventDefault();
+	showSection(link.getAttribute('href').slice(1));
+}));
+const menuButton=document.querySelector('.menu-icon');
+const menuPanel=document.querySelector('#site-menu');
+menuButton.addEventListener('click',()=>{
+	const isOpen=menuButton.getAttribute('aria-expanded')==='true';
+	menuButton.setAttribute('aria-expanded',String(!isOpen));
+	menuButton.setAttribute('aria-label',isOpen?'Open menu':'Close menu');
+	menuPanel.hidden=isOpen;
+});
+menuPanel.querySelectorAll('a').forEach(link=>link.addEventListener('click',event=>{
+	event.preventDefault();
+	showSection(link.getAttribute('href').slice(1));
+}));
+document.addEventListener('click',event=>{
+	if(!siteHeader.contains(event.target)){
+		menuPanel.hidden=true;
+		menuButton.setAttribute('aria-expanded','false');
+		menuButton.setAttribute('aria-label','Open menu');
+	}
+});
+document.addEventListener('keydown',event=>{
+	if(event.key==='Escape'&&!menuPanel.hidden){
+		menuPanel.hidden=true;
+		menuButton.setAttribute('aria-expanded','false');
+		menuButton.setAttribute('aria-label','Open menu');
+		menuButton.focus();
+	}
+});
+document.querySelector('.brand').addEventListener('click',event=>{
+	event.preventDefault();
+	if(document.body.classList.contains('site-entered'))showSection('main');
+});
+if(location.hash)showSection(location.hash.slice(1),false);
+const categoryDescriptions={ranking:"The GD Vault Stats Demonlist is an accurate ranking of Geometry Dash 1.1's hardest demons, based on input from multiple players.",stats:"The Stats Viewer assigns each player a score based on the demons they've beaten, then ranks them to show who's at the top.",records:'Each submitted record on the Demonlist is manually reviewed and accepted or rejected.',informative:'Thanks to our specialized connection to the Geometry Dash 1.1 servers, we can display a wide range of demon information, including descriptions, download counts, and more!'};const categoryButtons=[...document.querySelectorAll('.welcome-category')];const welcomeCopy=document.querySelector('#welcome-copy');const selectCategory=(button,focus=false)=>{categoryButtons.forEach(item=>{const selected=item===button;item.setAttribute('aria-selected',String(selected));item.tabIndex=selected?0:-1});welcomeCopy.textContent=categoryDescriptions[button.dataset.category];if(focus)button.focus()};categoryButtons.forEach((button,index)=>{button.tabIndex=index===0?0:-1;button.addEventListener('click',()=>selectCategory(button));button.addEventListener('keydown',event=>{let nextIndex;if(event.key==='ArrowRight')nextIndex=(index+1)%categoryButtons.length;else if(event.key==='ArrowLeft')nextIndex=(index-1+categoryButtons.length)%categoryButtons.length;else if(event.key==='Home')nextIndex=0;else if(event.key==='End')nextIndex=categoryButtons.length-1;else return;event.preventDefault();selectCategory(categoryButtons[nextIndex],true)})});document.querySelector('#welcome-cta').addEventListener('click',event=>{event.preventDefault();showSection('main')});
 let progress=1,skips=3;const randomId=()=>Math.floor(Math.random()*16993)+8;const updateRoulette=()=>{document.querySelector('#roulette-id').textContent=randomId();document.querySelector('#roulette-progress').textContent=`${progress}% to beat`;document.querySelector('#progress-bar').style.width=`${progress}%`;document.querySelector('#skip-count').textContent=skips;document.querySelector('#use-skip').disabled=skips===0};document.querySelector('#try-again').addEventListener('click',()=>{progress=1;skips=3;updateRoulette()});document.querySelector('#next-one').addEventListener('click',()=>{progress=Math.min(progress+1,100);updateRoulette()});document.querySelector('#use-skip').addEventListener('click',()=>{if(skips>0){skips--;updateRoulette()}});updateRoulette();
 </script>
 <script>
